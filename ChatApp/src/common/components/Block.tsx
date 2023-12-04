@@ -1,7 +1,16 @@
 import React from 'react';
 import { StyleSheet, View} from 'react-native';
 
-const Block = ({children, flex, row, color, align, justify, style, ...props} : any) => {
+const Block = ({
+    children,
+    flex,
+    row,
+    color,
+    align,
+    justify,
+    style,
+    ...props
+} : any) => {
     const blockStyle = StyleSheet.flatten([
         flex !== undefined && {flex},
         row !== undefined && {backgroundColor: row},
@@ -11,7 +20,9 @@ const Block = ({children, flex, row, color, align, justify, style, ...props} : a
         style
     ]);
     return (
-        <View style={blockStyle} {...props}>{children}</View>
+        <View style={blockStyle} {...props}>
+            {children}
+        </View>
     );
 };
 

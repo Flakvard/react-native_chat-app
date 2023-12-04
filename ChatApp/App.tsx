@@ -6,13 +6,14 @@
  */
 
 import React from 'react';
-import { StatusBar, StyleSheet} from 'react-native';
+import { ScrollView, StatusBar, StyleSheet} from 'react-native';
 
-import {Block, Button, Text} from './src/common/components'
+import {Block, Button, Text, Input} from './src/common/components'
 
 function App() {
 
   return (
+    <ScrollView>
         <Block flex={3} color="#fff" align="center" justify="center">
             <StatusBar barStyle={"dark-content"}/>
             <Text h1>Header 1</Text>
@@ -33,7 +34,13 @@ function App() {
                   <Text align="center" color="white">button</Text>
                 </Button>
               </Block>
+              <Block style={{marginTop: 12, }}>
+                <Text h3>Inputs</Text>
+                <Input keyboardType='email-address' placeholder='Email' placeholderTextColor="black"/>
+                <Input secureTextEntry placeholder='Password' placeholderTextColor="black"/>
+              </Block>
         </Block>
+    </ScrollView>
   );
 }
 
