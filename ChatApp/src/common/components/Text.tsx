@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text as RNText} from 'react-native'
+import { StyleSheet, Text as RNText} from 'react-native'
 import React from 'react'
 
 const Text = ({
@@ -11,6 +11,7 @@ const Text = ({
     size,
     weight ,
     color,
+    align,
     style,
     ...props
 } : any) => {
@@ -23,7 +24,8 @@ const Text = ({
         p !== undefined && {fontSize: 18},
         size !== undefined && {fontSize: size},
         weight !== undefined && {fontWeight: weight},
-        color !== undefined && {backgroundColor: color},
+        color !== undefined && {color: color},
+        align !== undefined && {textAlign: align},
         style
     ]);
     return (

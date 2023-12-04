@@ -6,9 +6,9 @@
  */
 
 import React from 'react';
-import { StatusBar, StyleSheet, View} from 'react-native';
+import { StatusBar, StyleSheet} from 'react-native';
 
-import {Block, Text} from './src/common/components'
+import {Block, Button, Text} from './src/common/components'
 
 function App() {
 
@@ -24,6 +24,15 @@ function App() {
               <Block row>
                 <Text>Hello world</Text>
               </Block>
+              <Block style={{marginTop: 12, }}>
+                <Text h3>Button</Text>
+                <Button>
+                  <Text>button</Text>
+                </Button>
+                <Button color="purple" radius={16} paddingVertical={6} paddingHorizontal={20}>
+                  <Text align="center" color="white">button</Text>
+                </Button>
+              </Block>
         </Block>
   );
 }
@@ -37,6 +46,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     fontSize: 24,
     fontWeight: '600',
+    textAlign: "center",
   },
 });
 
