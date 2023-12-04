@@ -6,17 +6,23 @@
  */
 
 import React from 'react';
-import { StatusBar, StyleSheet,Text,View} from 'react-native';
+import { StatusBar, StyleSheet, View} from 'react-native';
 
-import {Block} from './src/common/components'
+import {Block, Text} from './src/common/components'
 
 function App() {
 
   return (
         <Block flex={3} color="#fff" align="center" justify="center">
-            <Text>Hello world</Text>
             <StatusBar barStyle={"dark-content"}/>
-              <Block row color="blue">
+            <Text h1>Header 1</Text>
+            <Text h2>Header 2</Text>
+            <Text h3>Header 3</Text>
+            <Text h4>Header 4</Text>
+            <Text p>Paragraph</Text>
+            <Text>Text</Text>
+              <Block row>
+                <Text>Hello world</Text>
               </Block>
         </Block>
   );
