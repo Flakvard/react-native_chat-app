@@ -1,5 +1,29 @@
 import React from 'react';
-import { StyleSheet, View} from 'react-native';
+import { StyleProp, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
+
+interface IBlock extends ViewProps{
+    children?: React.ReactNode,
+    flex?: ViewStyle["flex"];
+    row?: ViewStyle["flexDirection"];
+    color?: ViewStyle["backgroundColor"];
+    align?: ViewStyle["alignItems"];
+    justify?: ViewStyle["justifyContent"];
+    margin?: ViewStyle["margin"];
+    marginTop?: ViewStyle["marginTop"];
+    marginBottom?: ViewStyle["marginBottom"];
+    marginRight?: ViewStyle["marginRight"];
+    marginLeft?: ViewStyle["marginLeft"];
+    marginHorizontal?: ViewStyle["marginHorizontal"];
+    marginVertical?: ViewStyle["marginVertical"];
+    padding?: ViewStyle["padding"];
+    paddingTop?: ViewStyle["paddingTop"];
+    paddingBottom?: ViewStyle["paddingBottom"];
+    paddingRight?: ViewStyle["paddingRight"];
+    paddingLeft?: ViewStyle["paddingLeft"];
+    paddingHorizontal?: ViewStyle["paddingHorizontal"];
+    paddingVertical?: ViewStyle["paddingVertical"];
+    style?: StyleProp<ViewStyle>;
+}
 
 const Block = ({
     children,
@@ -8,17 +32,45 @@ const Block = ({
     color,
     align,
     justify,
+    margin,
+    marginTop,
+    marginBottom,
+    marginRight,
+    marginLeft,
+    marginHorizontal,
+    marginVertical,
+    padding,
+    paddingTop,
+    paddingBottom,
+    paddingRight,
+    paddingLeft,
+    paddingHorizontal,
+    paddingVertical,
     style,
     ...props
-} : any) => {
+} : IBlock) => {
     const blockStyle = StyleSheet.flatten([
         flex !== undefined && {flex},
-        row !== undefined && {backgroundColor: row},
+        row !== undefined && {flexDirection: row},
         color !== undefined && {backgroundColor: color},
         align !== undefined && {alignItems: align},
         justify !== undefined && {justifyContent: justify},
+        margin !== undefined && { margin },
+        marginTop !== undefined && { marginTop },
+        marginBottom !== undefined && { marginBottom },
+        marginRight !== undefined && { marginRight },
+        marginLeft !== undefined && { marginLeft },
+        marginHorizontal !== undefined && { marginHorizontal },
+        marginVertical !== undefined && { marginVertical },
+        padding !== undefined && { padding },
+        paddingTop !== undefined && { paddingTop },
+        paddingBottom !== undefined && { paddingBottom },
+        paddingRight !== undefined && { paddingRight },
+        paddingLeft !== undefined && { paddingLeft },
+        paddingHorizontal !== undefined && { paddingHorizontal },
+        paddingVertical !== undefined && { paddingVertical },
         style
-    ]);
+    ]) as ViewProps;
     return (
         <View style={blockStyle} {...props}>
             {children}

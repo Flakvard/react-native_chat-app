@@ -4,7 +4,7 @@ import { Block, Button, Input, Text} from '../../../common/components';
 
 function Login() {
   return (
-    <Block marginTop={50} paddingButtom={20}>
+    <Block marginTop={50} paddingBottom={20}>
       <Text h3 align="center">Login</Text>
         <Input keyboardType='email-address' placeholder='Email' placeholderTextColor="black"/>
         <Input secureTextEntry placeholder='Password' placeholderTextColor="black"/>
