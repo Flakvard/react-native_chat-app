@@ -1,15 +1,31 @@
 import React from 'react'
-import { ThemeProvider } from '../../../common/hooks/useTheme';
+import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Input, Text} from '../../../common/components';
 
 
 function Login() {
+    const {sizes } = useTheme();
   return (
-    <Block marginTop={50} paddingBottom={20}>
-      <Text h3 align="center">Login</Text>
-        <Input keyboardType='email-address' placeholder='Email' placeholderTextColor="black"/>
-        <Input secureTextEntry placeholder='Password' placeholderTextColor="black"/>
-        <Button color="lightblue" radius={8} padding={16}>
+    <Block marginTop={50} paddingHorizontal={20}>
+      <Text h3 align="center">
+        Login
+      </Text>
+      <Text p align="center">
+        Enter your email & password
+      </Text>
+        <Input 
+            keyboardType='email-address' 
+            placeholder='Email' 
+            placeholderTextColor="black"
+            marginVertical={sizes.base}
+        />
+        <Input 
+            secureTextEntry 
+            placeholder='Password' 
+            placeholderTextColor="black"
+            marginVertical={sizes.base}
+        />
+        <Button color="#CCC" center>
             <Text align="center">
                 Login
             </Text>

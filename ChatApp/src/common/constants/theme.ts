@@ -1,3 +1,4 @@
+import { StyleSheet } from "react-native";
 
 export interface ITheme {
     sizes: {
@@ -22,15 +23,21 @@ export interface ITheme {
         inputHeight?: number,
         inputRadius?: number,
         inputBorder?: number,
-
+    },
+    weights: {
+        h1: string,
+        h2: string,
+        h3: string,
+        h4: string,
     }
+
 
 }
 
 export const SIZES = {
     // common sizes
     base: 8,
-    text: 14,
+    text: 16,
     padding: 20,
 
     // text sizes
@@ -48,11 +55,21 @@ export const SIZES = {
     // input sizes
     inputHeight: 40,
     inputRadius: 4,
-    inputBorder: 0,
+    inputBorder: StyleSheet.hairlineWidth,
+}
+
+export const WEIGHTS = {
+
+    // text sizes
+    h1: "800",
+    h2: "700",
+    h3: "600",
+    h4: "500",
 }
 
 export const THEME: ITheme = {
     sizes: SIZES,
+    weights: WEIGHTS,
 }
 
 export default THEME;

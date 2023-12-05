@@ -1,5 +1,6 @@
 import { StyleSheet, Text as RNText, TextStyle, StyleProp} from 'react-native'
 import React from 'react'
+import useTheme from '../hooks/useTheme';
 
 interface IText extends TextStyle{
     children?: React.ReactNode;
@@ -57,13 +58,16 @@ const Text = ({
     style,
     ...props
 } : IText) => {
+
+    const {sizes, weights} = useTheme();
+
     const textStyle = StyleSheet.flatten([
-        {fontSize: 16},
-        h1 !== undefined && {fontSize: 36, fontWeight: "800"},
-        h2 !== undefined && {fontSize: 28, fontWeight: "700"},
-        h3 !== undefined && {fontSize: 24, fontWeight: "600"},
-        h4 !== undefined && {fontSize: 22, fontWeight: "500"},
-        p !== undefined && {fontSize: 18},
+        {fontSize: sizes.text},
+        h1 !== undefined && {fontSize: sizes.h1, fontWeight: weights.h1},
+        h2 !== undefined && {fontSize: sizes.h2, fontWeight: weights.h2},
+        h3 !== undefined && {fontSize: sizes.h3, fontWeight: weights.h3},
+        h4 !== undefined && {fontSize: sizes.h4, fontWeight: weights.h4},
+        p !== undefined && {fontSize: sizes.p},
         size !== undefined && {fontSize: size},
         weight !== undefined && {fontWeight: weight},
         color !== undefined && {color: color},

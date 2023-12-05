@@ -1,5 +1,6 @@
 import React from 'react';
 import {TextInput, TextInputProps, StyleSheet, TextStyle, StyleProp} from 'react-native';
+import useTheme from '../hooks/useTheme';
 
 interface IInput extends TextInputProps {
     margin?: TextStyle["margin"];
@@ -38,7 +39,16 @@ const Input = ({
     style,
     ...props
 } : IInput) => {
+
+    const {sizes} = useTheme();
+
     const inputStyle = StyleSheet.flatten([
+        { 
+            height: sizes.inputHeight,
+            borderRadius: sizes.inputRadius,
+            borderWidth: sizes.inputBorder,
+            paddingHorizontal: sizes.base,
+        },
         margin !== undefined && { margin },
         marginTop !== undefined && { marginTop },
         marginBottom !== undefined && { marginBottom },
