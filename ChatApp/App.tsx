@@ -10,10 +10,14 @@ import { ScrollView, StatusBar, StyleSheet} from 'react-native';
 
 import {Block, Button, Text, Input} from './src/common/components'
 import { Login } from './src/features/auth/components';
+import { ThemeProvider } from './src/common/hooks/useTheme';
 
-function App() {
-  return <Login />
-
+const App = () => {
+  return (
+    <ThemeProvider>
+      <Login />
+    </ThemeProvider>
+  );
 }
 export default App;
 

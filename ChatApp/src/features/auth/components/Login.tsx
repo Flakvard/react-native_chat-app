@@ -1,4 +1,5 @@
 import React from 'react'
+import { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Input, Text} from '../../../common/components';
 
 
