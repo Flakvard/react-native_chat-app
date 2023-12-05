@@ -6,7 +6,7 @@ import { Block, Button, Input, Text} from '../../../common/components';
 function Login() {
     const {sizes } = useTheme();
   return (
-    <Block marginTop={50} paddingHorizontal={20}>
+    <Block marginTop={sizes.xxl} paddingHorizontal={sizes.padding}>
       <Text h3 align="center">
         Login
       </Text>
@@ -30,6 +30,14 @@ function Login() {
                 Login
             </Text>
         </Button>
+        <Block align='center' marginTop={20}>
+          <Text h1>Header 1</Text>
+          <Text h2>Header 2</Text>
+          <Text h3>Header 3</Text>
+          <Text h4>Header 4</Text>
+          <Text p>Paragraph</Text>
+          <Text>Default text</Text>
+        </Block>
     </Block>
   )
 }

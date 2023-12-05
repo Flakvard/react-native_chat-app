@@ -59,15 +59,15 @@ const Text = ({
     ...props
 } : IText) => {
 
-    const {sizes, weights} = useTheme();
+    const {sizes, weights, lines, letters} = useTheme();
 
     const textStyle = StyleSheet.flatten([
-        {fontSize: sizes.text},
-        h1 !== undefined && {fontSize: sizes.h1, fontWeight: weights.h1},
-        h2 !== undefined && {fontSize: sizes.h2, fontWeight: weights.h2},
-        h3 !== undefined && {fontSize: sizes.h3, fontWeight: weights.h3},
-        h4 !== undefined && {fontSize: sizes.h4, fontWeight: weights.h4},
-        p !== undefined && {fontSize: sizes.p},
+        {fontSize: sizes.text, lineHeight: lines.text, letterSpacing: letters.text},
+        h1 !== undefined && {fontSize: sizes.h1, lineHeight: lines.h1, letterSpacing: letters.h1, fontWeight: weights.h1},
+        h2 !== undefined && {fontSize: sizes.h2, lineHeight: lines.h2, letterSpacing: letters.h2, fontWeight: weights.h2},
+        h3 !== undefined && {fontSize: sizes.h3, lineHeight: lines.h3, letterSpacing: letters.h3, fontWeight: weights.h3},
+        h4 !== undefined && {fontSize: sizes.h4, lineHeight: lines.h4, letterSpacing: letters.h4, fontWeight: weights.h4},
+        p !== undefined && {fontSize: sizes.p, lineHeight: lines.p, letterSpacing: letters.p},
         size !== undefined && {fontSize: size},
         weight !== undefined && {fontWeight: weight},
         color !== undefined && {color: color},
