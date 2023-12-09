@@ -4,13 +4,13 @@ import { Block, Button, Input, Text} from '../../../common/components';
 
 
 function Login() {
-    const {sizes } = useTheme();
+    const {sizes, colors} = useTheme();
   return (
     <Block marginTop={sizes.xxl} paddingHorizontal={sizes.padding}>
-      <Text h3 align="center">
+      <Text h3 align="center" color={"#eac435"}>
         Login
       </Text>
-      <Text p align="center">
+      <Text p align="center" color={"#345995"}>
         Enter your email & password
       </Text>
         <Input 
@@ -19,14 +19,14 @@ function Login() {
             placeholderTextColor="black"
             marginVertical={sizes.base}
         />
-        <Input 
+        <Input
             secureTextEntry 
             placeholder='Password' 
             placeholderTextColor="black"
             marginVertical={sizes.base}
         />
-        <Button color="#CCC" center>
-            <Text align="center">
+        <Button color={colors.primary} center>
+            <Text align="center" color={colors.white}>
                 Login
             </Text>
         </Button>
@@ -37,6 +37,14 @@ function Login() {
           <Text h4>Header 4</Text>
           <Text p>Paragraph</Text>
           <Text>Default text</Text>
+        </Block>
+        <Block row justify='space-evenly' marginTop={sizes.xxl}>
+          <Block flex={0} radius={sizes.xs} color={colors.primary}  marginTop={sizes.xs} style={{height: 24, width: 20}}/>
+          <Block flex={0} radius={sizes.xs} color={colors.secondary}marginTop={sizes.xs} style={{height: 24, width: 20}}/>
+          <Block flex={0} radius={sizes.xs} color={colors.tertiary} marginTop={sizes.xs} style={{height: 24, width: 20}}/>
+          <Block flex={0} radius={sizes.xs} color={colors.warning}  marginTop={sizes.xs} style={{height: 24, width: 20}}/>
+          <Block flex={0} radius={sizes.xs} color={colors.error}    marginTop={sizes.xs} style={{height: 24, width: 20}}/>
+          <Block flex={0} radius={sizes.xs} color={colors.success}  marginTop={sizes.xs} style={{height: 24, width: 20}}/>
         </Block>
     </Block>
   )

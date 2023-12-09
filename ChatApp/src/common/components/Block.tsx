@@ -4,9 +4,10 @@ import { StyleProp, StyleSheet, View, ViewProps, ViewStyle} from 'react-native';
 interface IBlock extends ViewProps{
     children?: React.ReactNode,
     flex?: ViewStyle["flex"];
-    row?: ViewStyle["flexDirection"];
+    row?: boolean;
     color?: ViewStyle["backgroundColor"];
     align?: ViewStyle["alignItems"];
+    radius?: ViewStyle["borderRadius"];
     justify?: ViewStyle["justifyContent"];
     margin?: ViewStyle["margin"];
     marginTop?: ViewStyle["marginTop"];
@@ -30,6 +31,7 @@ const Block = ({
     flex,
     row,
     color,
+    radius,
     align,
     justify,
     margin,
@@ -51,8 +53,9 @@ const Block = ({
 } : IBlock) => {
     const blockStyle = StyleSheet.flatten([
         flex !== undefined && {flex},
-        row !== undefined && {flexDirection: row},
+        row !== undefined && {flexDirection: "row"},
         color !== undefined && {backgroundColor: color},
+        radius !== undefined && {borderRadius: radius},
         align !== undefined && {alignItems: align},
         justify !== undefined && {justifyContent: justify},
         margin !== undefined && { margin },

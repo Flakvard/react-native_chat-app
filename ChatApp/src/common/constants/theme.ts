@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { ColorValue, StyleSheet } from "react-native";
 import { IPerformanceLogger } from "react-native/Libraries/Utilities/IPerformanceLogger";
 
 export interface ISpacing {
@@ -61,12 +61,24 @@ export interface ILineLetter {
     small: number;
 }
 
-export interface ITheme {
-    sizes: ISizes & ISpacing,
-    lines: ILineHeights,
-    letters: ILineLetter,
-    weights: IWeights,
+export interface IColors {
+    primary:   ColorValue;
+    secondary: ColorValue;
+    tertiary:  ColorValue;
+    text:      ColorValue;
+    success:   ColorValue;
+    warning:   ColorValue;
+    error:     ColorValue;
+    white:     ColorValue;
+    black:     ColorValue;
+}
 
+export interface ITheme {
+    colors: IColors;
+    sizes: ISizes & ISpacing;
+    lines: ILineHeights;
+    letters: ILineLetter;
+    weights: IWeights;
 }
 
 const TEXT_SIZE = 16;
@@ -137,7 +149,20 @@ export const LETTER_SPACING = {
     small:  0,
 }
 
+export const COLORS = {
+    primary:  "#EAC435",   // Saffron
+    secondary:"#345995", // YInMnBlue
+    tertiary: "#03CEA4",  // mint
+    text:     "#14191F",
+    success:  "#64BC26",
+    warning:  "#FD6940",
+    error:    "#CA1551",
+    white:    "#FFFFFF",
+    black:    "#000000",
+}
+
 export const THEME: ITheme = {
+    colors: COLORS,
     sizes: {
         ...SIZES,
         ...SPACING

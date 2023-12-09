@@ -59,10 +59,10 @@ const Text = ({
     ...props
 } : IText) => {
 
-    const {sizes, weights, lines, letters} = useTheme();
+    const {sizes, weights, lines, letters, colors} = useTheme();
 
     const textStyle = StyleSheet.flatten([
-        {fontSize: sizes.text, lineHeight: lines.text, letterSpacing: letters.text},
+        {fontSize: sizes.text, lineHeight: lines.text, letterSpacing: letters.text, color: colors.text},
         h1 !== undefined && {fontSize: sizes.h1, lineHeight: lines.h1, letterSpacing: letters.h1, fontWeight: weights.h1},
         h2 !== undefined && {fontSize: sizes.h2, lineHeight: lines.h2, letterSpacing: letters.h2, fontWeight: weights.h2},
         h3 !== undefined && {fontSize: sizes.h3, lineHeight: lines.h3, letterSpacing: letters.h3, fontWeight: weights.h3},

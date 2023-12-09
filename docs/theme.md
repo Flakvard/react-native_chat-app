@@ -17,3 +17,5 @@ line height multiplied by: 1,3  for headers
 line height multiplied by: 1,3  for default tekst and paragraph
 line spacing multiplied by: -3% for headers
 line spacing multiplied by: 0%  for default tekst and paragraph
+
+# Colors
