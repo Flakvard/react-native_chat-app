@@ -47,17 +47,19 @@ const Button = ({
     paddingLeft,
     paddingHorizontal,
     paddingVertical,
+    activeOpacity = 0.5,
     style,
     ...props
 } : IButton) => {
 
-    const {sizes} = useTheme();
+    const {sizes, colors} = useTheme();
 
     const buttonStyle = StyleSheet.flatten([
         { 
             height: sizes.buttonHeight,
             borderRadius: sizes.buttonRadius,
             borderWidth: sizes.buttonBorder,
+            borderColor: colors.bottonBorder,
         },
         color !== undefined && {backgroundColor: color},
         radius !== undefined && {borderRadius: radius},
@@ -84,7 +86,7 @@ const Button = ({
         style
     ]) as ViewProps;
     return (
-        <TouchableOpacity style={buttonStyle} {...props}>
+        <TouchableOpacity style={buttonStyle} activeOpacity={activeOpacity} {...props}>
             {children}
         </TouchableOpacity>
     );

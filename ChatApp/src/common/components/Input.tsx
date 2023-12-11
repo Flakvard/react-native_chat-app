@@ -36,17 +36,19 @@ const Input = ({
     paddingLeft,
     paddingHorizontal,
     paddingVertical,
+    placeholderTextColor,
     style,
     ...props
 } : IInput) => {
 
-    const {sizes} = useTheme();
+    const {sizes, colors} = useTheme();
 
     const inputStyle = StyleSheet.flatten([
         { 
             height: sizes.inputHeight,
             borderRadius: sizes.inputRadius,
             borderWidth: sizes.inputBorder,
+            borderColor: colors.inputBorder,
             paddingHorizontal: sizes.base,
         },
         margin !== undefined && { margin },
@@ -66,7 +68,7 @@ const Input = ({
         style
     ]);
     return (
-        <TextInput style={inputStyle} {...props}>
+        <TextInput style={inputStyle} placeholderTextColor={placeholderTextColor || colors.inputBorder} {...props}>
             {children}
         </TextInput>
     );

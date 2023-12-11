@@ -71,6 +71,12 @@ export interface IColors {
     error:     ColorValue;
     white:     ColorValue;
     black:     ColorValue;
+
+    // Botton colors
+    bottonBorder: ColorValue;
+
+    // Input colors
+    inputBorder: ColorValue;
 }
 
 export interface ITheme {
@@ -98,12 +104,12 @@ export const SIZES = {
     small: TEXT_SIZE - 2,
 
     // button sizes
-    buttonHeight: 40,
-    buttonRadius: 4,
+    buttonHeight: 48,
+    buttonRadius: 8,
     buttonBorder: 0,
 
     // input sizes
-    inputHeight: 40,
+    inputHeight: 48,
     inputRadius: 4,
     inputBorder: StyleSheet.hairlineWidth,
 }
@@ -150,15 +156,21 @@ export const LETTER_SPACING = {
 }
 
 export const COLORS = {
-    primary:  "#EAC435",   // Saffron
-    secondary:"#345995", // YInMnBlue
+    primary:  "#eac435",  // Saffron
+    secondary:"#4a6ba0",  // YInMnBlue
     tertiary: "#03CEA4",  // mint
-    text:     "#14191F",
+    text:     "#FFFFFF",  //"#14191F",
     success:  "#64BC26",
     warning:  "#FD6940",
     error:    "#CA1551",
     white:    "#FFFFFF",
     black:    "#000000",
+
+    // Botton colors
+    bottonBorder: "#00000080",
+
+    // Input colors
+    inputBorder: "#00000080",
 }
 
 export const THEME: ITheme = {
