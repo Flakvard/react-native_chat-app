@@ -50,6 +50,7 @@ const Input = ({
             borderWidth: sizes.inputBorder,
             borderColor: colors.inputBorder,
             paddingHorizontal: sizes.base,
+            backgroundColor: colors.inputBackground,
         },
         margin !== undefined && { margin },
         marginTop !== undefined && { marginTop },

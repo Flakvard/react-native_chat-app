@@ -77,6 +77,7 @@ export interface IColors {
 
     // Input colors
     inputBorder: ColorValue;
+    inputBackground: ColorValue;
 }
 
 export interface ITheme {
@@ -171,6 +172,8 @@ export const COLORS = {
 
     // Input colors
     inputBorder: "#00000080",
+    inputBackground: "#fae289"
+    //inputBackground: "#a0c2fa"
 }
 
 export const THEME: ITheme = {
