@@ -5,114 +5,58 @@
  * @format
  */
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import React, { useEffect } from 'react';
+import { Platform, ScrollView, StatusBar, StyleSheet} from 'react-native';
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import {Block, Button, Text, Input} from './src/common/components'
+import { Login } from './src/features/auth/components';
+import { ThemeProvider } from './src/common/hooks/useTheme';
+import SplashScreen from 'react-native-splash-screen';
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
 
-function Section({children, title}: SectionProps): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+const App = () => {
 
-function App(): JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  useEffect(() => {
+    if (Platform.OS === "android")
+      SplashScreen.hide();
+  }, [])
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ThemeProvider>
+      <Login />
+    </ThemeProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
 export default App;
+
+  // return (
+    // <ScrollView>
+        // <Block flex={3} color="#fff" align="center" justify="center">
+            // <StatusBar barStyle={"dark-content"}/>
+            // <Text h1>Header 1</Text>
+            // <Text h2>Header 2</Text>
+            // <Text h3>Header 3</Text>
+            // <Text h4>Header 4</Text>
+            // <Text p>Paragraph</Text>
+            // <Text>Text</Text>
+              // <Block row>
+                // <Text>Hello world</Text>
+              // </Block>
+              // <Block style={{marginTop: 12, }}>
+                // <Text h3>Button</Text>
+                // <Button>
+                  // <Text>button</Text>
+                // </Button>
+                // <Button color="purple" radius={16} paddingVertical={6} paddingHorizontal={20}>
+                  // <Text align="center" color="white">button</Text>
+                // </Button>
+              // </Block>
+              // <Block style={{marginTop: 12, }}>
+                // <Text h3>Inputs</Text>
+                // <Input keyboardType='email-address' placeholder='Email' placeholderTextColor="black"/>
+                // <Input secureTextEntry placeholder='Password' placeholderTextColor="black"/>
+              // </Block>
+        // </Block>
+    // </ScrollView>
+  // );
+// }
