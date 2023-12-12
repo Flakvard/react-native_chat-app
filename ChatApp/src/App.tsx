@@ -6,8 +6,9 @@ import {LoginScreen, RegisterScreen, Screen3} from './features/auth/AuthNavigato
 
 import SplashScreen from 'react-native-splash-screen';
 import { ThemeProvider } from './common/hooks/useTheme';
+import { ChatRoom, Message, RoomList } from './features/chat/components';
 
-const isLoggedIn = false;
+const isLoggedIn = true;
 const PolyChat = () => {
 
   useEffect(() => {
@@ -20,12 +21,15 @@ const PolyChat = () => {
       <ThemeProvider>
         {isLoggedIn ?(
           <Root.Navigator>
-            <Root.Screen name="Screen3" component={Screen3} />
+            <Root.Screen name="ChatRoom" component={ChatRoom} />
+            <Root.Screen name="Message" component={Message} />
+            <Root.Screen name="RoomList" component={RoomList} />
           </Root.Navigator>
         ):(
           <Root.Navigator>
             <Root.Screen name="Login" component={LoginScreen} />
             <Root.Screen name="Register" component={RegisterScreen} />
+            <Root.Screen name="Screen3" component={Screen3} />
           </Root.Navigator>
         )}
         {}
