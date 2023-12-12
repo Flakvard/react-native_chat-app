@@ -1,8 +1,9 @@
 import React from 'react'
 import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Text } from '../../../common/components'
+import { MessageProps } from '../ChatNavigator';
 
-const Message = ({navigation}) => {
+const Message : React.FC<MessageProps> =  ({navigation}) => {
   const {sizes, colors} = useTheme();
   return (
     <Block flex={1} color={colors.secondary}>

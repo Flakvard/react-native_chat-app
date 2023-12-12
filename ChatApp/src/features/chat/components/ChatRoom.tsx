@@ -1,8 +1,9 @@
 import React from 'react'
 import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Text } from '../../../common/components'
+import { ChatRoomProps } from '../ChatNavigator';
 
-const ChatRoom = ({navigation}) => {
+const ChatRoom: React.FC<ChatRoomProps> = ({navigation}) => {
   const {sizes, colors} = useTheme();
   return (
     <Block flex={1} color={colors.secondary}>

@@ -2,9 +2,10 @@ import React from 'react'
 import { Image, StyleSheet } from 'react-native';
 import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Input, Text} from '../../../common/components';
+import { LoginProps } from '../AuthNavigator';
 
 
-function Login({navigation}) {
+const Login : React.FC<LoginProps> = ({navigation}) => {
     const {sizes, colors} = useTheme();
   return (
     <Block color={colors.secondary} flex={1}>

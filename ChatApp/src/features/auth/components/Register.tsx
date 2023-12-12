@@ -2,8 +2,10 @@ import React from 'react'
 import { Image, StyleSheet } from 'react-native';
 import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Input, Text} from '../../../common/components';
+import { RegisterProps } from '../AuthNavigator';
 
-function Register({navigation}) {
+
+const Register : React.FC<RegisterProps> = ({navigation}) => {
     const {sizes, colors} = useTheme();
   return (
     <Block color={colors.secondary} flex={1}>

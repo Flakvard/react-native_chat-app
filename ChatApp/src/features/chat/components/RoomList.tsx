@@ -1,8 +1,9 @@
 import React from 'react'
 import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Text } from '../../../common/components'
+import { RoomListProps } from '../ChatNavigator';
 
-const RoomList = ({navigation}) => {
+const RoomList : React.FC<RoomListProps> = ({navigation}) => {
   const {sizes, colors} = useTheme();
   return (
     <Block flex={1} color={colors.secondary}>

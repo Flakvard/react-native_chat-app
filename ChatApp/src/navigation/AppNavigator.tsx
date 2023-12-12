@@ -1,12 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 export type RootParamList = {
-  Login:    { paramA: string}
-  Register: { paramA: string}
-  Screen3:  { paramA: string}
-  ChatRoom: { paramA: string}
-  Message:  { paramA: string}
-  RoomList: { paramA: string}
+  Login:    undefined
+  Register: undefined
+  Screen3:  undefined
+  ChatRoom: undefined
+  Message:  undefined
+  RoomList: undefined
 }
 
 const isLoggedIn = false;
