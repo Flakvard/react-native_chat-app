@@ -4,7 +4,7 @@ import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Input, Text} from '../../../common/components';
 
 
-function Login() {
+function Login({navigation}) {
     const {sizes, colors} = useTheme();
   return (
     <Block color={colors.secondary} flex={1}>
@@ -36,6 +36,12 @@ function Login() {
               <Text align="center" color={colors.white}>
                   Login
               </Text>
+          </Button>
+          <Button marginTop={sizes.m} onPress={() => navigation.navigate('Register')}>
+              <Text p weight='bold' align='right'>Create an account? Sign up</Text> 
+          </Button>
+          <Button marginTop={sizes.m} onPress={() => navigation.navigate('Register')}>
+              <Text p weight='bold' align='right'>Continue with Google? Click here</Text> 
           </Button>
       </Block>
     </Block>
