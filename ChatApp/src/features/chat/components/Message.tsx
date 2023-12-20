@@ -7,6 +7,7 @@ import Status from './Status';
 import MessageList from './MessageList';
 import { createImageMessage, createTextMessage } from '../util\
 s/MessageUtils';
+import Toolbar from './Toolbar';
 
 //const Message : React.FC<MessageProps> =  ({navigation}) => {
 
@@ -24,6 +25,7 @@ const Message = () =>  {
         createImageMessage('https://fastly.picsum.photos/id/1035/300/300.jpg?hmac=h2e6yb4s09DR32Lvxopvsee73kUjJIpGLxp0IpxxN2c'),
       ],
       fullscreenImageId: null,
+      isInputFocused: false,
     });
 
     // android back button press to close full screen image
@@ -102,11 +104,6 @@ const Message = () =>  {
         <Block style={styles.inputMethodEditor}></Block>
       );
     }
-    const renderToolbar = () => {
-      return (
-        <Block style={styles.toolbar}></Block>
-      );
-    }
 
     const renderFullscreenImage = () => {
       const { messages, fullscreenImageId } = state;
@@ -126,6 +123,39 @@ const Message = () =>  {
       );
     };
 
+
+    const handlePressToolbarCamera = () => {
+    }
+
+    const handleChangeFocus = (isFocused: boolean) => {
+      setState({
+        ...state,
+        isInputFocused: isFocused });
+    };
+
+    const handleSubmit = (text: string) => {
+      const { messages } = state;
+      setState({
+        ...state,
+        messages: [createTextMessage(text), ...messages],
+      });
+    };
+
+    const renderToolbar = () => {
+      const { isInputFocused } = state;
+        
+        return (
+          <Block style={styles.toolbar}>
+            <Toolbar
+            isFocused={isInputFocused}
+            onSubmit={handleSubmit}
+            onChangeFocus={handleChangeFocus}
+            onPressCamera={handlePressToolbarCamera}
+            />
+          </Block>);
+    }
+
+
     return (
         <Block style={styles.container}>
         <Status />
@@ -136,6 +166,8 @@ const Message = () =>  {
         </Block>
     );
 }
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
