@@ -5,56 +5,68 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Block, Text } from '../../../common/components';
+import { addEventListener } from "@react-native-community/netinfo";
+import NetInfo from "@react-native-community/netinfo";
 
 
-const STYLES = ['default', 'dark-content', 'light-content'] as const;
-
-const state = {
-info: null,
-};
-
-//const { info } = state.info;
-// const isConnected = info !== 'none';
-const isConnected = false;
-const backgroundColor = isConnected ? 'white' : 'red';
-
-const Status = () => {
+export default class Status extends React.Component {
+  // Subscribe
+  unsubscribe = addEventListener(status => {
+    console.log("Connection type", status.type);
+    console.log("Is connected?", status.isConnected);
+  });
 
 
-  const statusBar = (
-    <StatusBar
-      animated={true}
-      backgroundColor={backgroundColor}
-      barStyle={isConnected ? 'dark-content' : 'light-content'}
-      showHideTransition="fade"
-      hidden={false}
-    />
-    );
+  state = {
+    isConnected: true, // Assume connected initially
+  };
 
-  const messageContainer = (
-    <Block style={styles.messageContainer} pointerEvents={'none'}>
-    {statusBar}
-    {!isConnected && (
-    <Block style={styles.bubble}>
-    <Text style={styles.text}>No network connection</Text>
-    </Block>
-    )}
-    </Block>
-  );
+  componentDidMount() {
+    // Subscribe to network status updates
+    this.unsubscribe = NetInfo.addEventListener(state => {
+      console.log("Connection type", state.type);
+      console.log("Is connected?", state.isConnected);
 
-  return (
-    <SafeAreaView style={styles.container}>
-      {messageContainer}
-    </SafeAreaView>
-  );
+      // Update the component state with the current network status
+      this.setState({ isConnected: state.isConnected });
+    });
+  }
+  componentWillUnmount() {
+    // Unsubscribe from network status updates when the component is unmounted
+    if (this.unsubscribe) {
+      this.unsubscribe();
+    }
+  }
+
+  render() {
+
+    const { isConnected } = this.state;
+    const backgroundColor = isConnected ? 'white' : 'red';
+
+    return (
+
+      <Block>
+        <StatusBar
+          animated={true}
+          backgroundColor={backgroundColor}
+          barStyle={isConnected ? 'dark-content' : 'light-content'}
+          showHideTransition="fade"
+          hidden={false}
+        />
+        <Block style={styles.messageContainer} pointerEvents={'none'}>
+          {!isConnected && (
+            <Block style={styles.bubble}>
+              <Text style={styles.text}>No network connection</Text>
+            </Block>
+          )}
+        </Block>
+      </Block>
+    )
+
+  };
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    backgroundColor: '#ECF0F1',
-  },
   buttonsContainer: {
     padding: 10,
   },
@@ -70,16 +82,15 @@ const styles = StyleSheet.create({
     left: 0,
     height: 80,
     alignItems: 'center',
-    },
-    bubble: {
+  },
+  bubble: {
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 20,
     backgroundColor: 'red',
-    },
-    text: {
+  },
+  text: {
     color: 'white',
-    },
+  },
 });
 
-export default Status;
