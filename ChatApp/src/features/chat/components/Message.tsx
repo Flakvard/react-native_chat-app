@@ -8,6 +8,7 @@ import MessageList from './MessageList';
 import { createImageMessage, createTextMessage } from '../util\
 s/MessageUtils';
 import Toolbar from './Toolbar';
+import ImageGrid from './ImageGrid';
 
 //const Message : React.FC<MessageProps> =  ({navigation}) => {
 
@@ -101,7 +102,11 @@ const Message = () =>  {
 
     const renderInputMethodEditor = () => {
       return (
-        <Block style={styles.inputMethodEditor}></Block>
+        <Block style={styles.inputMethodEditor}>
+          <ImageGrid onPressImage={function (uri: string): void {
+            throw new Error('Function not implemented.');
+          } } />
+        </Block>
       );
     }
 
@@ -158,7 +163,7 @@ const Message = () =>  {
 
     return (
         <Block style={styles.container}>
-        <Status />
+          <Status />
           {renderMessageList()}
           {renderToolbar()}
           {renderInputMethodEditor()}
