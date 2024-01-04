@@ -9,6 +9,9 @@ interface GridProps<T> {
   itemMargin?: number;
   // Include other FlatListProps as needed
   keyExtractor?: (item: T, index: number) => string;
+  onEndReached?: ((info: {distanceFromEnd: number}) => void) | null;
+  onEndReachedThreshold?: number;
+
 }
 
 const Grid = ({
@@ -17,6 +20,8 @@ const Grid = ({
   itemMargin = StyleSheet.hairlineWidth,
   data,
   keyExtractor,
+  onEndReached,
+  onEndReachedThreshold,
   ...restProps
 }: GridProps<any>) => {
 
@@ -44,6 +49,8 @@ const Grid = ({
             numColumns={numColumns}
             data={data}
             keyExtractor={keyExtractor}
+            onEndReached={onEndReached}
+            onEndReachedThreshold={onEndReachedThreshold}
         />
     );
 };

@@ -12,8 +12,6 @@ import NetInfo from "@react-native-community/netinfo";
 export default class Status extends React.Component {
   // Subscribe
   unsubscribe = addEventListener(status => {
-    console.log("Connection type", status.type);
-    console.log("Is connected?", status.isConnected);
   });
 
 
@@ -24,8 +22,6 @@ export default class Status extends React.Component {
   componentDidMount() {
     // Subscribe to network status updates
     this.unsubscribe = NetInfo.addEventListener(state => {
-      console.log("Connection type", state.type);
-      console.log("Is connected?", state.isConnected);
 
       // Update the component state with the current network status
       this.setState({ isConnected: state.isConnected });

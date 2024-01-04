@@ -15,12 +15,13 @@ interface ImageGridProps {}
 
 
 const ImageGrid: React.FC<ImageGridProps> = ({onPressImage}) => {
-  const [images, setImages] = useState<string[]|undefined>([]);
 
-  console.log("images: ", images);
+  const [images, setImages] = useState<string[]|undefined>([]);
+  const [loading, setLoading] = useState(false);
+  const [cursor, setCursor] = useState<string | null | undefined>(null);
 
   useEffect(() => {
-    getCameraRoll();
+    getImages(undefined); // Initial fetch
   }, []);
 
   async function hasAndroidPermission() {
@@ -51,28 +52,45 @@ const ImageGrid: React.FC<ImageGridProps> = ({onPressImage}) => {
     return await getRequestPermissionPromise();
   }
 
-  const getCameraRoll = async () => {
+  const getImages = async (after: string | undefined) => {
+
+    if (loading) return;
+
     try {
       if (Platform.OS === "android" && !(await hasAndroidPermission())) {
         return;
       }
+      setLoading(true);
+
       // Load images from CameraRoll
       CameraRoll.getPhotos({
         first: 20,
+        after,
         assetType: 'Photos',
       })
         .then((result) => {
-          const cameraRollImages = result.edges.map((item) => item.node.image.uri);
-          console.log("images from Camera packages",cameraRollImages);
-          setImages(cameraRollImages);
+
+          const { edges, page_info: { has_next_page, end_cursor } } = result;
+          const loadedImages = edges.map(item => item.node.image.uri);
+
+          setImages((prevImages: any) => (prevImages ? [...prevImages, ...loadedImages] : loadedImages));
+          setCursor(has_next_page ? end_cursor : null);
+
         })
         .catch((error) => {
           console.warn('Error loading images from CameraRoll:', error);
         });
     } catch (error) {
       console.warn('Error getting images:', error);
+    } finally{
+      setLoading(false);
     }
   }
+  
+    const getNextImages = () => {
+    if (!cursor) return;
+    getImages(cursor);
+    };
 
 
   const renderItem = (item: string, index: number, size: any, marginTop: any, marginLeft: any) => {
@@ -81,10 +99,10 @@ const ImageGrid: React.FC<ImageGridProps> = ({onPressImage}) => {
     
 
     const style = {
-      width: size,  // 100
-      height: size, // 100
-      marginLeft,   // 5
-      marginTop,    // 5
+      width: size,  
+      height: size, 
+      marginLeft,   
+      marginTop,    
     } as  StyleProp<ImageStyle>;;
 
     return (
@@ -100,6 +118,8 @@ const ImageGrid: React.FC<ImageGridProps> = ({onPressImage}) => {
       renderItem={(item: string,index: number, size: any, marginLeft: any, marginTop: any) => renderItem(item, index, size, marginLeft, marginTop)}
       keyExtractor={(item, index) => `${index}`}
       numColumns={4}
+      onEndReached={getNextImages}
+      onEndReachedThreshold={0.1}
     />
   );
 };
