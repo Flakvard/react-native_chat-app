@@ -8,7 +8,6 @@ import { CameraRoll } from "@react-native-camera-roll/camera-roll";
 
 interface ImageGridProps {
   onPressImage: (uri: string) => void;
-  images: string[];
 }
 
 interface ImageGridProps {}

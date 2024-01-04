@@ -29,40 +29,7 @@ const Message = () =>  {
       isInputFocused: false,
     });
 
-    // android back button press to close full screen image
-    useEffect(() => {
-      const onHardwareBackPress = () => {
-        const { fullscreenImageId } = state; 
-        if (fullscreenImageId) {
-          console.log(fullscreenImageId, " image id")
-          dismissFullscreenImage(); 
-          return true;
-        }
-        return false;
-      };
-  
-      const subscription = BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
-      return () => {
-        subscription.remove(); // Cleanup 
-      };
-    }, [state.fullscreenImageId]); // Empty dependency array ensures the effect runs once after the initial render
 
-
-    const dismissFullscreenImage = () => {
-      setState({
-        ...state,
-         fullscreenImageId: null 
-        });
-    };
-
-    const renderMessageList = () => {
-      const { messages } = state;
-      return (
-        <Block style={styles.content}>
-          <MessageList messages={messages} onPressMessage={handlePressMessage} />
-        </Block>
-      );
-    }
 
     const handlePressMessage = ({ id, type }:any) => {
       switch (type) {
@@ -100,12 +67,56 @@ const Message = () =>  {
         }
     }
 
+    const handlePressImage = (uri: string) => {
+      const { messages } = state;
+      setState({
+        ...state,
+        messages: [createImageMessage(uri), ...messages],
+      });
+    };
+
+
+    const [messages, setMessages] = useState<any[]>([]); // Replace 'any' with the actual type of messages if available
+
+    // android back button press to close full screen image
+    useEffect(() => {
+      const onHardwareBackPress = () => {
+        const { fullscreenImageId } = state; 
+        if (fullscreenImageId) {
+          console.log(fullscreenImageId, " image id")
+          dismissFullscreenImage(); 
+          return true;
+        }
+        return false;
+      };
+  
+      const subscription = BackHandler.addEventListener('hardwareBackPress', onHardwareBackPress);
+      return () => {
+        subscription.remove(); // Cleanup 
+      };
+    }, [state.fullscreenImageId]); // Empty dependency array ensures the effect runs once after the initial render
+
+
+    const dismissFullscreenImage = () => {
+      setState({
+        ...state,
+         fullscreenImageId: null 
+        });
+    };
+
+    const renderMessageList = () => {
+      const { messages } = state;
+      return (
+        <Block style={styles.content}>
+          <MessageList messages={messages} onPressMessage={handlePressMessage} />
+        </Block>
+      );
+    }
+
     const renderInputMethodEditor = () => {
       return (
         <Block style={styles.inputMethodEditor}>
-          <ImageGrid onPressImage={function (uri: string): void {
-            throw new Error('Function not implemented.');
-          } } images={[]} />
+          <ImageGrid onPressImage={handlePressImage}/>
         </Block>
       );
     }
