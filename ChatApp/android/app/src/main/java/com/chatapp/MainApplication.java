@@ -16,6 +16,9 @@ import org.devio.rn.splashscreen.SplashScreen;
 import android.os.Bundle;
 
 
+// react-native CameraRoll
+import com.reactnativecommunity.cameraroll.CameraRollPackage;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -32,7 +35,12 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
+
+          // Error may be present if the package is present only once and 
+          // automatically added later during build time by autolinking
+          // Comment these packages and rebuild
           // packages.add(new SplashScreenReactPackage());
+          // packages.add(new CameraRollPackage());
           return packages;
         }
 
