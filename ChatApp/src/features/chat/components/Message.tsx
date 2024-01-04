@@ -105,7 +105,7 @@ const Message = () =>  {
         <Block style={styles.inputMethodEditor}>
           <ImageGrid onPressImage={function (uri: string): void {
             throw new Error('Function not implemented.');
-          } } />
+          } } images={[]} />
         </Block>
       );
     }

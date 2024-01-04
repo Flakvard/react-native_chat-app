@@ -1,21 +1,26 @@
 import React from 'react';
-import { FlatList, StyleSheet, FlatListProps, Dimensions, PixelRatio, ViewStyle } from 'react-native';
+import { FlatList, StyleSheet, Dimensions, PixelRatio, ViewStyle} from 'react-native';
 import { Block } from '../../../common/components';
 
-interface GridProps<T> extends FlatListProps<T> {
-    renderItem: (info: any) => React.ReactElement;
-    numColumns?: number;
-    itemMargin?: number;
+interface GridProps<T> {
+  renderItem: (item: string,index: number, size: any, marginLeft: any, marginTop: any) => React.ReactElement | null;
+  data: ArrayLike<T>;
+  numColumns?: number;
+  itemMargin?: number;
+  // Include other FlatListProps as needed
+  keyExtractor?: (item: T, index: number) => string;
 }
 
 const Grid = ({
-    renderItem,
-    numColumns = 4,
-    itemMargin = StyleSheet.hairlineWidth,
-    ...restProps
+  renderItem,
+  numColumns = 4,
+  itemMargin = StyleSheet.hairlineWidth,
+  data,
+  keyExtractor,
+  ...restProps
 }: GridProps<any>) => {
 
-    const renderGridItem = ({ index, ...info }: any) => {
+    const renderGridItem = ({ item, index }: any) => {
         const { width } = Dimensions.get('window');
         const size = PixelRatio.roundToNearestPixel(
             (width - itemMargin * (numColumns - 1)) / numColumns
@@ -27,7 +32,7 @@ const Grid = ({
 
         return (
             <Block style={{ marginLeft, marginTop } as ViewStyle}>
-                {renderItem({ ...info, size, marginLeft, marginTop })}
+                {renderItem(item,index, size, marginLeft, marginTop)}
             </Block>
         );
     };
@@ -35,8 +40,10 @@ const Grid = ({
     return (
         <FlatList 
             {...restProps} 
-            renderItem={renderGridItem} 
+            renderItem={renderGridItem}
             numColumns={numColumns}
+            data={data}
+            keyExtractor={keyExtractor}
         />
     );
 };
