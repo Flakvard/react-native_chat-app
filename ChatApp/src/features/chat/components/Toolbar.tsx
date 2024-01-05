@@ -32,21 +32,28 @@ const Toolbar: React.FC<ToolbarProps> = ({
     const [text, setText] = useState<string>('');
     const inputRef = useRef<TextInput>(null);
 
+    console.log("this is text state",text);
     const handleChangeText = (inputText: string) => {
         setText(inputText);
     };
 
-    const handleSubmitEditing = () => {
-        const text = inputRef.current?.context || ''; // Access value from ref
+    const handleSubmitEditing = (event: any) => {
+        console.log('Submit button pressed');
+        //const text = inputRef.current?.context || '';  // Access value from ref
+        const text = event.nativeEvent.text || '';
+        console.log('Text submitted: ',text);
         if (!text) return;
         onSubmit(text as string);
+        setText('');
     };
 
     const handleFocus = () => {
+        console.log('Input focused');
         onChangeFocus(true);
     };
 
     const handleBlur = () => {
+        console.log('Input blurred');
         onChangeFocus(false);
     };
 
@@ -66,6 +73,7 @@ const Toolbar: React.FC<ToolbarProps> = ({
         <ToolbarButton title={'📷'} onPress={onPressCamera} />
         <View style={styles.inputContainer}>
         <TextInput
+            value={text}
             style={styles.input}
             underlineColorAndroid="transparent"
             placeholder="Type something!"
@@ -73,8 +81,10 @@ const Toolbar: React.FC<ToolbarProps> = ({
             ref={inputRef}
             onFocus={handleFocus}
             onBlur={handleBlur}
-            onChangeText={handleChangeText}
+            onChangeText={newText => handleChangeText(newText) }
             onSubmitEditing={handleSubmitEditing}
+            editable={true}
+            returnKeyType='send'
         />
         </View>
     </View>

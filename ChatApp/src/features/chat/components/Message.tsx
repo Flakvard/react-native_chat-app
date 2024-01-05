@@ -167,6 +167,7 @@ const Message = () => {
   };
 
   const handleSubmit = (text: string) => {
+    console.log('Sending message:', text);
     const { messages } = state;
     setState({
       ...state,

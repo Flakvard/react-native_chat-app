@@ -82,7 +82,6 @@ const MessagingContainer: React.FC<MessagingContainerProps> = ({
       // Keyboard shown
       if (inputMethod !== INPUT_METHOD.KEYBOARD) {
       // Guard condition to prevent unnecessary updates
-      console.log('Showing keyboard');
       onChangeInputMethod(INPUT_METHOD.KEYBOARD);
       }
     } else if (!keyboardVisible && inputMethod !== INPUT_METHOD.CUSTOM) {
@@ -90,7 +89,6 @@ const MessagingContainer: React.FC<MessagingContainerProps> = ({
       // Only handle hide if the keyboard is not visible and the input method is not custom
       if (inputMethod !== INPUT_METHOD.NONE) {
         // Guard condition to prevent unnecessary updates
-        console.log('Hiding keyboard');
         onChangeInputMethod(INPUT_METHOD.NONE);
       }
     }
@@ -128,7 +126,7 @@ const MessagingContainer: React.FC<MessagingContainerProps> = ({
 
   // Adjust to height of the keyboard
   const containerStyle: ViewStyle = {
-    height: useContentHeight ? (contentHeight-35) : containerHeight,
+    height: useContentHeight ? (contentHeight-50) : containerHeight,
     //marginTop: (keyboardWillShow) ? 50 : 0
   };
 
