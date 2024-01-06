@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactElement, ReactNode, useEffect, useState } from 'react'
 import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Text } from '../../../common/components'
-import { StyleSheet, Alert, TouchableHighlight, Image, BackHandler, View, Keyboard } from 'react-native';
+import { StyleSheet, Alert, TouchableHighlight, Image, BackHandler, Keyboard } from 'react-native';
 import Status from './Status';
 import MessageList from './MessageList';
-import { MessageShape, createImageMessage, createTextMessage, receiveImageMessage, receiveTextMessage } from '../utils/MessageUtils';
+import { createImageMessage, createTextMessage, receiveImageMessage, receiveTextMessage } from '../utils/MessageUtils';
 import Toolbar from './Toolbar';
 import ImageGrid from './ImageGrid';
 
-import KeyboardState from './KeyboardState';
-import MeasureLayout from './MeasureLayout';
+import KeyboardState, { KeyboardStateProps } from './KeyboardState';
+import MeasureLayout, { MeasureLayoutProps } from './MeasureLayout';
 import MessagingContainer, { INPUT_METHOD } from './MessagingContainer';
+import { MessageShape } from '../utils/types';
 
 //const Message : React.FC<MessageProps> =  ({navigation}) => {
 
@@ -25,7 +26,7 @@ interface MessageScreenState {
 const Message = () => {
   //const {sizes, colors} = useTheme();
 
-  const MESSAGE_BATCH_SIZE = 25; // Adjust the batch size as needed
+  const MESSAGE_BATCH_SIZE = 20; // Adjust the batch size as needed
 
   const [state, setState] = useState<MessageScreenState>({
     allMessages: [],
@@ -46,7 +47,7 @@ const Message = () => {
     });
   }, []);
 
-  // seed the messages with random messages and 
+  // seed the messages with random messages and images
   const generateMessages = (count: number): MessageShape[] => {
     const messages: MessageShape[] = [];
     messages.push(createTextMessage("You are really good with cameras! 🤓🤳"))
@@ -258,9 +259,9 @@ const Message = () => {
     <Block style={styles.container}>
       <Status />
       <MeasureLayout>
-        {(layout) => (
+        {(layout): ReactElement<MeasureLayoutProps> => (
           <KeyboardState layout={layout}>
-            {(keyboardInfo) => (
+            {(keyboardInfo) : ReactElement<KeyboardStateProps> => (
               <MessagingContainer
                 {...keyboardInfo}
                 inputMethod={state.inputMethod}

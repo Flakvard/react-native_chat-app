@@ -1,18 +1,12 @@
+/*
+  Grid.tsx:
+  This component will render a default Grid from Flatlist
+*/
 import React from 'react';
 import { FlatList, StyleSheet, Dimensions, PixelRatio, ViewStyle} from 'react-native';
 import { Block } from '../../../common/components';
+import { GridProps } from '../utils/types';
 
-interface GridProps<T> {
-  renderItem: (item: string,index: number, size: any, marginLeft: any, marginTop: any) => React.ReactElement | null;
-  data: ArrayLike<T>;
-  numColumns?: number;
-  itemMargin?: number;
-  // Include other FlatListProps as needed
-  keyExtractor?: (item: T, index: number) => string;
-  onEndReached?: ((info: {distanceFromEnd: number}) => void) | null;
-  onEndReachedThreshold?: number;
-
-}
 
 const Grid = ({
   renderItem,

@@ -1,7 +1,11 @@
+/*
+  MessageList.tsx:
+  This component will keep track all incomeing messages and render the Message body
+*/
 import React from 'react';
 import { FlatList, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Block, Text } from '../../../common/components';
-import { MessageShape } from '../utils/MessageUtils';
+import { MessageShape } from '../utils/types';
 
 interface MessageListProps {
     messages: MessageShape[];
@@ -23,6 +27,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, onPressMessage, loa
     const renderMessageBody = ({ type, text, uri }: MessageShape, index: number) => {
         let messageBubbleStyle, messageTextStyle;
 
+        // one possible imporvement is to implement Message factory
         switch (type) {
             case 'textCre':
                 messageBubbleStyle = styles.creMessageBubble;

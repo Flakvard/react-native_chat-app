@@ -1,10 +1,4 @@
-export interface MessageShape {
-    id: number;
-    type: 'textCre' | 'textRec' | 'imageCre'| 'imageRec';
-    text?: string;
-    uri?: string;
-}
-
+import { MessageShape } from "./types";
 
 // TODO: Firebase id
 let messageId = 0;

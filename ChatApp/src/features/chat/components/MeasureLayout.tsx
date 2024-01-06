@@ -6,18 +6,13 @@ import React, { ReactNode, useState } from 'react';
 import { Platform, StyleSheet, View, ViewStyle, LayoutChangeEvent } from 'react-native';
 
 import { Dimensions, StatusBar } from 'react-native'
+import { Layout } from '../utils/types';
 
 
-interface MeasureLayoutProps {
+export interface MeasureLayoutProps {
   children: (layout: Layout) => ReactNode;
 }
 
-interface Layout {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-}
 
 const MeasureLayout: React.FC<MeasureLayoutProps> = ({ children }) => {
   const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get('window');

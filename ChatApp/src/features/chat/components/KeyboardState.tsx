@@ -4,14 +4,10 @@
 */
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Keyboard, KeyboardEvent, Platform } from 'react-native';
+import { Layout } from '../utils/types';
 
-interface KeyboardStateProps {
-  layout: {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-  };
+export interface KeyboardStateProps {
+  layout:Layout
   children: (state: KeyboardState) => ReactNode;
 }
 

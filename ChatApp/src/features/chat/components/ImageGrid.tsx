@@ -1,16 +1,15 @@
+/*
+  ImageGrid.tsx:
+  This component will render a the image grid for the messenger. Uses Grid.tsx
+*/
 import React, { useEffect, useState } from 'react';
 import { Image, StyleSheet, TouchableOpacity, StyleProp, ImageStyle } from 'react-native';
 import Grid from './Grid';
 import { PermissionsAndroid, Platform, } from 'react-native';
 import { CameraRoll } from "@react-native-camera-roll/camera-roll";
+import { ImageGridProps } from '../utils/types';
 
 
-
-interface ImageGridProps {
-  onPressImage: (uri: string) => void;
-}
-
-interface ImageGridProps {}
 
 
 const ImageGrid: React.FC<ImageGridProps> = ({onPressImage}) => {
