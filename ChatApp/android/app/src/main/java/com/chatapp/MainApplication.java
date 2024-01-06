@@ -19,6 +19,9 @@ import android.os.Bundle;
 // react-native CameraRoll
 import com.reactnativecommunity.cameraroll.CameraRollPackage;
 
+// icons
+import com.oblador.vectoricons.VectorIconsPackage;
+
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -41,6 +44,7 @@ public class MainApplication extends Application implements ReactApplication {
           // Comment these packages and rebuild
           // packages.add(new SplashScreenReactPackage());
           // packages.add(new CameraRollPackage());
+          // packages.add(new VectorIconsPackage());
           return packages;
         }
 
