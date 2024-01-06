@@ -5,7 +5,7 @@ import { MessageProps } from '../ChatNavigator';
 import { StyleSheet, Alert, TouchableHighlight, Image, BackHandler, View, Keyboard } from 'react-native';
 import Status from './Status';
 import MessageList from './MessageList';
-import { createImageMessage, createTextMessage } from '../utils/MessageUtils';
+import { createImageMessage, createTextMessage, receiveImageMessage, receiveTextMessage } from '../utils/MessageUtils';
 import Toolbar from './Toolbar';
 import ImageGrid from './ImageGrid';
 
@@ -21,14 +21,22 @@ const Message = () => {
 
   const [state, setState] = useState({
     messages: [
+      createTextMessage("You are really good with cameras! 🤓🤳"),
+      receiveImageMessage('https://fastly.picsum.photos/id/82/200/300.jpg?hmac=hfuNcoCWsYuVOmlcRdKAieM4Ax03DjM-mpVlqRUdGfc'),
+      receiveTextMessage("I travled to Japan - Check out this photo I took"),
+      receiveTextMessage("Wow! beautiful!🥰"),
       createImageMessage('https://fastly.picsum.photos/id/28/300/300.jpg?hmac=G2cdhmuBEY2rDoSefRxiQLssBctP0GCKz_UhmEU1JIA'),
-      createTextMessage('World'),
-      createTextMessage('Hello'),
-      createTextMessage('World'),
-      createTextMessage('Hello'),
       createImageMessage('https://fastly.picsum.photos/id/1035/300/300.jpg?hmac=h2e6yb4s09DR32Lvxopvsee73kUjJIpGLxp0IpxxN2c'),
-      createImageMessage('https://fastly.picsum.photos/id/1035/300/300.jpg?hmac=h2e6yb4s09DR32Lvxopvsee73kUjJIpGLxp0IpxxN2c'),
-      createImageMessage('https://fastly.picsum.photos/id/1035/300/300.jpg?hmac=h2e6yb4s09DR32Lvxopvsee73kUjJIpGLxp0IpxxN2c'),
+      createTextMessage('when I was on holiday I took these 😇'),
+      createTextMessage('Wow!'),
+      receiveImageMessage('https://fastly.picsum.photos/id/510/200/300.jpg?hmac=u6iNoUL4S50O2eGkBF1jHRJL3Hgrbgdb258jroHPYeI'),
+      receiveTextMessage("Check out this photo I took😎"),
+      receiveTextMessage("Yes, me too😅"),
+      receiveTextMessage("Fantastic!👏"),
+      createTextMessage("Great! How's it going for you?😄"),
+      receiveTextMessage("How's it going?😊"),
+      receiveTextMessage('Hi!😄'),
+      createTextMessage('Hello World 😁'),
     ],
     fullscreenImageId: null,
     isInputFocused: false,
@@ -38,7 +46,7 @@ const Message = () => {
 
   const handlePressMessage = ({ id, type }: any) => {
     switch (type) {
-      case 'text':
+      case 'textCre':
         Alert.alert(
           'Delete message?',
           'Are you sure you want to permanently delete this message?',
@@ -61,7 +69,13 @@ const Message = () => {
           ],
         );
         break;
-      case 'image':
+      case 'imageCre':
+        setState({
+          ...state,
+          fullscreenImageId: id,
+        });
+        break;
+      case 'imageRec':
         setState({
           ...state,
           fullscreenImageId: id,
@@ -167,7 +181,6 @@ const Message = () => {
   };
 
   const handleSubmit = (text: string) => {
-    console.log('Sending message:', text);
     const { messages } = state;
     setState({
       ...state,
@@ -190,7 +203,7 @@ const Message = () => {
   }
 
       return (
-          <View style={styles.container}>
+          <Block style={styles.container}>
             <Status />
             <MeasureLayout>
             {(layout) => (
@@ -210,7 +223,7 @@ const Message = () => {
             )}
           </MeasureLayout>
           {renderFullscreenImage()}
-          </View>
+          </Block>
       );
 }
 

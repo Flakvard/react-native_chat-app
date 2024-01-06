@@ -32,28 +32,23 @@ const Toolbar: React.FC<ToolbarProps> = ({
     const [text, setText] = useState<string>('');
     const inputRef = useRef<TextInput>(null);
 
-    console.log("this is text state",text);
     const handleChangeText = (inputText: string) => {
         setText(inputText);
     };
 
     const handleSubmitEditing = (event: any) => {
-        console.log('Submit button pressed');
         //const text = inputRef.current?.context || '';  // Access value from ref
         const text = event.nativeEvent.text || '';
-        console.log('Text submitted: ',text);
         if (!text) return;
         onSubmit(text as string);
         setText('');
     };
 
     const handleFocus = () => {
-        console.log('Input focused');
         onChangeFocus(true);
     };
 
     const handleBlur = () => {
-        console.log('Input blurred');
         onChangeFocus(false);
     };
 

@@ -1,55 +1,47 @@
-import PropTypes from 'prop-types';
+export interface Message {
+    id: number;
+    type: 'textCre' | 'textRec' | 'imageCre'| 'imageRec';
+    text?: string;
+    uri?: string;
+}
 
-// export type MessageShape = {
-//     id: number,
-//     type: ['text', 'image', 'location'],
-//     text: string,
-//     uri: string,
-//     coordinate: {
-//         latitude:  number,
-//         longitude: number,
-//     },
-// };
-// 
-// export type MessageShapeList = {
-//     messages: MessageShape[]
-// }
 
-export const MessageShape = PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    type: PropTypes.oneOf(['text', 'image', 'location']),
-    text: PropTypes.string,
-    uri: PropTypes.string,
-    //coordinate: PropTypes.shape({
-    //latitude: PropTypes.number.isRequired,
-    //longitude: PropTypes.number.isRequired,
-    //}),
-});
-
+// TODO: Firebase id
 let messageId = 0;
 
 function getNextId() {
     messageId += 1;
     return messageId;
 }
-export function createTextMessage(text: string) {
+
+export function createTextMessage(text: string): Message {
     return {
-        type: 'text',
+        type: 'textCre',
         id: getNextId(),
         text,
     };
 }
-export function createImageMessage(uri: string) {
+
+export function receiveTextMessage(text: string): Message {
     return {
-        type: 'image',
+        type: 'textRec', // I corrected the typo from 'textReq' to 'textRec'
+        id: getNextId(),
+        text,
+    };
+}
+
+export function createImageMessage(uri: string): Message {
+    return {
+        type: 'imageCre',
         id: getNextId(),
         uri,
     };
 }
-// export function createLocationMessage(coordinate: any) {
-//     return {
-//         type: 'location',
-//         id: getNextId(),
-//         coordinate,
-//     };
-// }
+
+export function receiveImageMessage(uri: string): Message {
+    return {
+        type: 'imageRec',
+        id: getNextId(),
+        uri,
+    };
+}

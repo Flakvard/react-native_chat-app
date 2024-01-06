@@ -1,90 +1,108 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { MessageShape } from '../utils/MessageUtils';
 import { FlatList, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
-import { Block, Button, Text } from '../../../common/components';
-// import MapView from 'react-native-maps';
+import { Block, Text } from '../../../common/components';
+import { Message } from '../utils/MessageUtils';
 
+interface MessageListProps {
+    messages: Message[];
+    onPressMessage: (message: Message) => void;
+}
 
-const keyExtractor = (item: { id: { toString: () => any; }; }) => item.id.toString();
+const MessageList: React.FC<MessageListProps> = ({ messages, onPressMessage }) => {
+    const keyExtractor = (item: Message) => item.id.toString();
 
-export default class MessageList extends React.Component {
-
-    static propTypes = {
-        messages: PropTypes.arrayOf(MessageShape).isRequired,
-        onPressMessage: PropTypes.func,
-    };
-
-    static defaultProps = {
-        onPressMessage: () => {},
-        };
-    
-    renderMessageItem = ({ item }: any) => {
-        const { onPressMessage }: any = this.props;
-        return (
-            <Block key={item.id} style={styles.messageRow}>
+    const renderMessageItem = ({ item, index }: { item: Message; index: number }) => (
+        <Block key={item.id} style={styles.messageRow}>
             <TouchableWithoutFeedback onPress={() => onPressMessage(item)}>
-            {this.renderMessageBody(item)}
+                {renderMessageBody(item, index)}
             </TouchableWithoutFeedback>
+        </Block>
+    );
+
+    const renderMessageBody = ({ type, text, uri }: Message, index: number) => {
+        let messageBubbleStyle, messageTextStyle;
+
+        switch (type) {
+            case 'textCre':
+                messageBubbleStyle = styles.creMessageBubble;
+                messageTextStyle = styles.creMessageText;
+                break;
+            case 'textRec':
+                messageBubbleStyle = styles.reqMessageBubble;
+                messageTextStyle = styles.reqMessageText;
+                break;
+            case 'imageCre':
+                return <Image style={styles.imageCre} source={{ uri }} />;
+            case 'imageRec':
+                return <Image style={styles.imageRec} source={{ uri }} />;
+            default:
+                return null;
+        }
+
+
+        return (
+            <Block style={[ messageBubbleStyle,]}>
+                <Text style={messageTextStyle}>{text}</Text>
             </Block>
         );
     };
 
-    renderMessageBody = ({ type, text, uri }: any) => {
-        switch (type) {
-            case 'text':
-                return (
-                    <Block style={styles.messageBubble}>
-                    <Text style={styles.text}>{text}</Text>
-                    </Block>
-                );
-            case 'image':
-                return <Image style={styles.image} source={{ uri }} />;
-            default:
-                return null;
-            }
-            };
-
-    render() {
-        const { messages }:any = this.props;
-        return (
-            <FlatList
-                style={styles.container}
-                inverted
-                data={messages}
-                renderItem={this.renderMessageItem}
-                keyExtractor={keyExtractor}
-                keyboardShouldPersistTaps={'handled'}
-            />
-        );
-    }
-}
+    return (
+        <FlatList
+            style={styles.container}
+            inverted
+            data={messages}
+            renderItem={renderMessageItem}
+            keyExtractor={keyExtractor}
+            keyboardShouldPersistTaps={'handled'}
+        />
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        overflow: 'visible', 
+        overflow: 'visible',
     },
     messageRow: {
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
         marginBottom: 4,
         marginRight: 10,
-        marginLeft: 60,
+        marginLeft: 10,
     },
-    messageBubble: {
+    creMessageBubble: {
         paddingVertical: 5,
         paddingHorizontal: 10,
         backgroundColor: 'rgb(16,135,255)',
         borderRadius: 20,
+        alignSelf: 'flex-end',
     },
-    text: {
+    reqMessageBubble: {
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        backgroundColor: 'rgb(240,240,240)',
+        borderRadius: 20,
+        alignSelf: 'flex-start',
+    },
+    creMessageText: {
         fontSize: 18,
         color: 'white',
     },
-    image: {
+    reqMessageText: {
+        fontSize: 18,
+        color: 'black',
+    },
+    imageCre: {
         width: 150,
         height: 150,
         borderRadius: 10,
+        alignSelf: 'flex-end',
+    },
+    imageRec: {
+        width: 150,
+        height: 150,
+        borderRadius: 10,
+        alignSelf: 'flex-start',
     },
 });
+
+export default MessageList;
