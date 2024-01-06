@@ -1,4 +1,4 @@
-export interface Message {
+export interface MessageShape {
     id: number;
     type: 'textCre' | 'textRec' | 'imageCre'| 'imageRec';
     text?: string;
@@ -14,7 +14,7 @@ function getNextId() {
     return messageId;
 }
 
-export function createTextMessage(text: string): Message {
+export function createTextMessage(text: string): MessageShape {
     return {
         type: 'textCre',
         id: getNextId(),
@@ -22,7 +22,7 @@ export function createTextMessage(text: string): Message {
     };
 }
 
-export function receiveTextMessage(text: string): Message {
+export function receiveTextMessage(text: string): MessageShape {
     return {
         type: 'textRec', // I corrected the typo from 'textReq' to 'textRec'
         id: getNextId(),
@@ -30,7 +30,7 @@ export function receiveTextMessage(text: string): Message {
     };
 }
 
-export function createImageMessage(uri: string): Message {
+export function createImageMessage(uri: string): MessageShape {
     return {
         type: 'imageCre',
         id: getNextId(),
@@ -38,7 +38,7 @@ export function createImageMessage(uri: string): Message {
     };
 }
 
-export function receiveImageMessage(uri: string): Message {
+export function receiveImageMessage(uri: string): MessageShape {
     return {
         type: 'imageRec',
         id: getNextId(),

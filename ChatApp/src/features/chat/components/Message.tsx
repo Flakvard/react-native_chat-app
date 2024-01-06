@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Text } from '../../../common/components'
-import { MessageProps } from '../ChatNavigator';
 import { StyleSheet, Alert, TouchableHighlight, Image, BackHandler, View, Keyboard } from 'react-native';
 import Status from './Status';
 import MessageList from './MessageList';
-import { createImageMessage, createTextMessage, receiveImageMessage, receiveTextMessage } from '../utils/MessageUtils';
+import { MessageShape, createImageMessage, createTextMessage, receiveImageMessage, receiveTextMessage } from '../utils/MessageUtils';
 import Toolbar from './Toolbar';
 import ImageGrid from './ImageGrid';
 
@@ -15,33 +14,65 @@ import MessagingContainer, { INPUT_METHOD } from './MessagingContainer';
 
 //const Message : React.FC<MessageProps> =  ({navigation}) => {
 
+interface MessageScreenState {
+  allMessages: MessageShape[];
+  messages: MessageShape[];
+  fullscreenImageId: string | null;
+  isInputFocused: boolean;
+  inputMethod: string;
+}
 
 const Message = () => {
   //const {sizes, colors} = useTheme();
 
-  const [state, setState] = useState({
+  const MESSAGE_BATCH_SIZE = 25; // Adjust the batch size as needed
+
+  const [state, setState] = useState<MessageScreenState>({
+    allMessages: [],
     messages: [
-      createTextMessage("You are really good with cameras! 🤓🤳"),
-      receiveImageMessage('https://fastly.picsum.photos/id/82/200/300.jpg?hmac=hfuNcoCWsYuVOmlcRdKAieM4Ax03DjM-mpVlqRUdGfc'),
-      receiveTextMessage("I travled to Japan - Check out this photo I took"),
-      receiveTextMessage("Wow! beautiful!🥰"),
-      createImageMessage('https://fastly.picsum.photos/id/28/300/300.jpg?hmac=G2cdhmuBEY2rDoSefRxiQLssBctP0GCKz_UhmEU1JIA'),
-      createImageMessage('https://fastly.picsum.photos/id/1035/300/300.jpg?hmac=h2e6yb4s09DR32Lvxopvsee73kUjJIpGLxp0IpxxN2c'),
-      createTextMessage('when I was on holiday I took these 😇'),
-      createTextMessage('Wow!'),
-      receiveImageMessage('https://fastly.picsum.photos/id/510/200/300.jpg?hmac=u6iNoUL4S50O2eGkBF1jHRJL3Hgrbgdb258jroHPYeI'),
-      receiveTextMessage("Check out this photo I took😎"),
-      receiveTextMessage("Yes, me too😅"),
-      receiveTextMessage("Fantastic!👏"),
-      createTextMessage("Great! How's it going for you?😄"),
-      receiveTextMessage("How's it going?😊"),
-      receiveTextMessage('Hi!😄'),
-      createTextMessage('Hello World 😁'),
     ],
     fullscreenImageId: null,
     isInputFocused: false,
     inputMethod: INPUT_METHOD.NONE
   });
+
+  useEffect(() => {
+    // Seed the message list with 50 messages initially
+    const initialMessages = generateMessages(50);
+    setState({
+      ...state,
+      allMessages: initialMessages,
+      messages: initialMessages.slice(0, MESSAGE_BATCH_SIZE),
+    });
+  }, []);
+
+  // seed the messages with random messages and 
+  const generateMessages = (count: number): MessageShape[] => {
+    const messages: MessageShape[] = [];
+    messages.push(createTextMessage("You are really good with cameras! 🤓🤳"))
+    messages.push(receiveImageMessage('https://fastly.picsum.photos/id/82/200/300.jpg?hmac=hfuNcoCWsYuVOmlcRdKAieM4Ax03DjM-mpVlqRUdGfc'))
+    messages.push(receiveTextMessage("I travled to Japan - Check out this photo I took"))
+    messages.push(receiveTextMessage("Wow! beautiful!🥰"))
+    messages.push(createImageMessage('https://fastly.picsum.photos/id/28/300/300.jpg?hmac=G2cdhmuBEY2rDoSefRxiQLssBctP0GCKz_UhmEU1JIA'))
+    messages.push(createImageMessage('https://fastly.picsum.photos/id/1035/300/300.jpg?hmac=h2e6yb4s09DR32Lvxopvsee73kUjJIpGLxp0IpxxN2c'))
+    messages.push(createTextMessage('when I was on holiday I took these 😇'))
+    messages.push(createTextMessage('Wow!'))
+    messages.push(receiveImageMessage('https://fastly.picsum.photos/id/510/200/300.jpg?hmac=u6iNoUL4S50O2eGkBF1jHRJL3Hgrbgdb258jroHPYeI'))
+    messages.push(receiveTextMessage("Check out this photo I took😎"))
+    messages.push(receiveTextMessage("Yes, me too😅"))
+    messages.push(receiveTextMessage("Fantastic!👏"))
+    messages.push(createTextMessage("Great! How's it going for you?😄"))
+    messages.push(receiveTextMessage("How's it going?😊"))
+    messages.push(receiveTextMessage('Hi!😄'))
+    messages.push(createTextMessage('Hello World 😁'))
+    for (let i = 1; i <= count; i++) {
+      messages.push(createTextMessage(`Message ${i}`));
+      messages.push(createImageMessage('https://picsum.photos/200/300'));
+      messages.push(receiveTextMessage(`Message ${i}`));
+      messages.push(receiveImageMessage('https://picsum.photos/200/300'));
+    }
+    return messages;
+  };
 
 
   const handlePressMessage = ({ id, type }: any) => {
@@ -120,11 +151,32 @@ const Message = () => {
     });
   };
 
+  const loadMoreMessages = () => {
+    const { allMessages, messages } = state;
+
+    // Calculate the range of messages to load
+    const startIndex = messages.length;
+    const endIndex = Math.min(startIndex + MESSAGE_BATCH_SIZE, allMessages.length);
+
+    // Append the next batch of messages to the displayed messages
+    const newMessages = allMessages.slice(startIndex, endIndex);
+
+    // Update the state to trigger a re-render
+    setState((prevState) => ({
+      ...prevState,
+      messages: [...prevState.messages, ...newMessages],
+    }));
+  }
+
   const renderMessageList = () => {
     const { messages } = state;
     return (
       <Block style={styles.content}>
-        <MessageList messages={messages} onPressMessage={handlePressMessage} />
+        <MessageList
+          messages={messages}
+          onPressMessage={handlePressMessage}
+          loadMoreMessages={loadMoreMessages}
+        />
       </Block>
     );
   }
@@ -169,7 +221,7 @@ const Message = () => {
     setState((prev) => ({
       ...prev,
       isInputFocused: false,
-      inputMethod: INPUT_METHOD.CUSTOM,  
+      inputMethod: INPUT_METHOD.CUSTOM,
     }));
   };
 
@@ -202,31 +254,30 @@ const Message = () => {
       </Block>);
   }
 
-      return (
-          <Block style={styles.container}>
-            <Status />
-            <MeasureLayout>
-            {(layout) => (
-              <KeyboardState layout={layout}>
-                {(keyboardInfo) => (
-                  <MessagingContainer
-                    {...keyboardInfo}
-                    inputMethod={state.inputMethod}
-                    onChangeInputMethod={handleChangeInputMethod}
-                    renderInputMethodEditor={renderInputMethodEditor}
-                  >
-                    {renderMessageList()}
-                    {renderToolbar()}
-                  </MessagingContainer>
-                )}
-              </KeyboardState>
+  return (
+    <Block style={styles.container}>
+      <Status />
+      <MeasureLayout>
+        {(layout) => (
+          <KeyboardState layout={layout}>
+            {(keyboardInfo) => (
+              <MessagingContainer
+                {...keyboardInfo}
+                inputMethod={state.inputMethod}
+                onChangeInputMethod={handleChangeInputMethod}
+                renderInputMethodEditor={renderInputMethodEditor}
+              >
+                {renderMessageList()}
+                {renderToolbar()}
+              </MessagingContainer>
             )}
-          </MeasureLayout>
-          {renderFullscreenImage()}
-          </Block>
-      );
+          </KeyboardState>
+        )}
+      </MeasureLayout>
+      {renderFullscreenImage()}
+    </Block>
+  );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -256,6 +307,5 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
 });
-
 export default Message
 

@@ -1,17 +1,18 @@
 import React from 'react';
 import { FlatList, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Block, Text } from '../../../common/components';
-import { Message } from '../utils/MessageUtils';
+import { MessageShape } from '../utils/MessageUtils';
 
 interface MessageListProps {
-    messages: Message[];
-    onPressMessage: (message: Message) => void;
+    messages: MessageShape[];
+    onPressMessage: (message: MessageShape) => void;
+    loadMoreMessages: () => void; // Function to load more messages
 }
 
-const MessageList: React.FC<MessageListProps> = ({ messages, onPressMessage }) => {
-    const keyExtractor = (item: Message) => item.id.toString();
+const MessageList: React.FC<MessageListProps> = ({ messages, onPressMessage, loadMoreMessages}) => {
+    const keyExtractor = (item: MessageShape) => item.id.toString();
 
-    const renderMessageItem = ({ item, index }: { item: Message; index: number }) => (
+    const renderMessageItem = ({ item, index }: { item: MessageShape; index: number }) => (
         <Block key={item.id} style={styles.messageRow}>
             <TouchableWithoutFeedback onPress={() => onPressMessage(item)}>
                 {renderMessageBody(item, index)}
@@ -19,7 +20,7 @@ const MessageList: React.FC<MessageListProps> = ({ messages, onPressMessage }) =
         </Block>
     );
 
-    const renderMessageBody = ({ type, text, uri }: Message, index: number) => {
+    const renderMessageBody = ({ type, text, uri }: MessageShape, index: number) => {
         let messageBubbleStyle, messageTextStyle;
 
         switch (type) {
@@ -55,6 +56,8 @@ const MessageList: React.FC<MessageListProps> = ({ messages, onPressMessage }) =
             renderItem={renderMessageItem}
             keyExtractor={keyExtractor}
             keyboardShouldPersistTaps={'handled'}
+            onEndReached={loadMoreMessages} // Handle the end of the list
+            onEndReachedThreshold={0.1} // Trigger onEndReached when 10% from the bottom
         />
     );
 };
