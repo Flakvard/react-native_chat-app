@@ -12,8 +12,8 @@ import KeyboardState, { KeyboardStateProps } from './KeyboardState';
 import MeasureLayout, { MeasureLayoutProps } from './MeasureLayout';
 import MessagingContainer, { INPUT_METHOD } from './MessagingContainer';
 import { MessageShape } from '../utils/types';
+import { MessageProps } from '../ChatNavigator';
 
-//const Message : React.FC<MessageProps> =  ({navigation}) => {
 
 interface MessageScreenState {
   allMessages: MessageShape[];
@@ -23,7 +23,7 @@ interface MessageScreenState {
   inputMethod: string;
 }
 
-const Message = () => {
+const Message : React.FC<MessageProps> = ({ navigation }) => {
   //const {sizes, colors} = useTheme();
 
   const MESSAGE_BATCH_SIZE = 20; // Adjust the batch size as needed

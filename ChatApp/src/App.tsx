@@ -8,6 +8,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { ThemeProvider } from './common/hooks/useTheme';
 import { ChatRoom, Message} from './features/chat/components';
 import { RoomList } from './features/room/components';
+import Profile from './features/room/components/Profile';
 
 const isLoggedIn = true;
 const PolyChat = () => {
@@ -25,6 +26,7 @@ const PolyChat = () => {
             <Root.Screen name="ChatRoom" component={ChatRoom} />
             <Root.Screen name="Message" component={Message} />
             <Root.Screen name="RoomList" component={RoomList} />
+            <Root.Screen name="Profile" component={Profile}  />
           </Root.Navigator>
         ):(
           <Root.Navigator>
