@@ -146,7 +146,7 @@ const MessagingContainer: React.FC<MessagingContainerProps> = ({
   // Adjust the height of the custom input method
   const inputStyle: ViewStyle = {
     height: showCustomInput ? keyboardHeight || 325 : 0,
-    marginTop: (keyboardIsHidden || keyboardIsHiding) ? 0 : 0
+    marginTop: (keyboardIsHidden || keyboardIsHiding) ? 50 : 0
   };
 
   return (

@@ -1,6 +1,6 @@
-import { uuid } from "./uuid";
-import { Contact, MappedContact } from "./types";
-import capitalize from "./capitalize";
+import capitalize from "../../common/utils/capitalize";
+import { Contact, MappedContact } from "../../common/utils/types";
+import { uuid } from "../../common/utils/uuid";
 
 interface FetchResponse {
   results: Contact[];
