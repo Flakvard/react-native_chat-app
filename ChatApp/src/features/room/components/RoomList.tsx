@@ -8,11 +8,11 @@ import {
   ViewStyle,
   Linking,
 } from "react-native";
-import getURLParams from "../utils/getURLParams";
+import getURLParams from "../../../common/utils/getURLParams";
 import store from "../store";
-import { MappedContact, Subscription } from "../utils/types";
+import { MappedContact, Subscription } from "../../../common/utils/types";
 import RoomListItem from "../components/RoomListItem";
-import { fetchContacts } from "../utils/api";
+import { fetchContacts } from "../../../common/utils/api";
 import { RoomListProps } from "../RoomNavigator";
 import useTheme from "../../../common/hooks/useTheme";
 
@@ -63,7 +63,7 @@ const RoomList : React.FC<RoomListProps> = ({navigation}) => {
         );
 
       if (queriedContact) {
-        navigation.navigate("Message");
+        navigation.navigate("Profile", { userId: queriedContact.id });
       }
     }
   };
@@ -76,7 +76,7 @@ const RoomList : React.FC<RoomListProps> = ({navigation}) => {
         name={name}
         avatar={avatar}
         phone={phone}
-        onPress={() => navigation.navigate("Message")}
+        onPress={() => navigation.navigate("Profile", {userId: id})}
       />
     );
   };
