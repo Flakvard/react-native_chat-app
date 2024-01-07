@@ -167,6 +167,11 @@ export const COLORS = {
     white:    "#FFFFFF",
     black:    "#000000",
 
+    greyDark: '#BBBBBB',
+    grey: '#D8D8D8',
+    greyLight: '#f7f7f7',
+    blue: '#3498DB',
+
     // Botton colors
     bottonBorder: "#00000080",
 

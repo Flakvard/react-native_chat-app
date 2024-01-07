@@ -6,7 +6,8 @@ import {LoginScreen, RegisterScreen, Screen3} from './features/auth/AuthNavigato
 
 import SplashScreen from 'react-native-splash-screen';
 import { ThemeProvider } from './common/hooks/useTheme';
-import { ChatRoom, Message, RoomList } from './features/chat/components';
+import { ChatRoom, Message} from './features/chat/components';
+import { RoomList } from './features/room/components';
 
 const isLoggedIn = true;
 const PolyChat = () => {
