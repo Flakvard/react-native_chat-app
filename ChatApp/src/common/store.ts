@@ -1,4 +1,4 @@
-import { StoreState, Subscription, Listener } from "../../common/utils/types";
+import { Listener, StoreState, Subscription } from "./utils/types";
 
 let state: StoreState = {
   isFetchingContacts: true,

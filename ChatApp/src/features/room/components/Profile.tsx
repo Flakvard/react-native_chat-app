@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
-import ContactThumbnail from "./ContactThumbnail";
 import DetailListItem from "./DetailListItem";
 import { MappedContact, StoreState } from "../../../common/utils/types";
 import {COLORS} from "../../../common/constants/theme";
-import store from "../store";
+import store from "../../../common/store";
 import { ProfileProps } from "../RoomNavigator";
+import ContactThumbnail from "../../../common/components/ContactThumbnail";
 
 
 const Profile: React.FC<ProfileProps> = ({ route }) => {

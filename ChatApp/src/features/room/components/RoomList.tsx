@@ -9,7 +9,7 @@ import {
   Linking,
 } from "react-native";
 import getURLParams from "../../../common/utils/getURLParams";
-import store from "../store";
+import store from "../../../common/store";
 import { MappedContact, Subscription } from "../../../common/utils/types";
 import RoomListItem from "../components/RoomListItem";
 import { fetchContacts } from "../../../common/utils/api";
@@ -35,6 +35,8 @@ const RoomList : React.FC<RoomListProps> = ({navigation}) => {
 
     const unsubscribe: Subscription = store.onChange(() => updateState());
 
+    // first time it fetches data - may case trouble if other pages are opened first 
+    // fx. deeplinking
     const fetchData = async () => {
         const fetchedContacts = await fetchContacts();
         store.setState({ contacts: fetchedContacts, isFetchingContacts: false });

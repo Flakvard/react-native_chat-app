@@ -8,7 +8,7 @@ import SplashScreen from 'react-native-splash-screen';
 import { ThemeProvider } from './common/hooks/useTheme';
 import { ChatRoom, Message} from './features/chat/components';
 import { RoomList } from './features/room/components';
-import Profile from './features/room/components/Profile';
+import { Profile } from './features/room/components';
 
 const isLoggedIn = true;
 const PolyChat = () => {
