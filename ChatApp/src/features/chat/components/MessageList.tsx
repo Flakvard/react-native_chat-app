@@ -6,6 +6,7 @@ import React from 'react';
 import { FlatList, Image, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { Block, Text } from '../../../common/components';
 import { MessageShape } from '../utils/types';
+import { COLORS } from '../../../common/constants/theme';
 
 interface MessageListProps {
     messages: MessageShape[];
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     creMessageBubble: {
         paddingVertical: 5,
         paddingHorizontal: 10,
-        backgroundColor: 'rgb(16,135,255)',
+        backgroundColor: COLORS.primary,//'rgb(16,135,255)',
         borderRadius: 20,
         alignSelf: 'flex-end',
     },

@@ -14,11 +14,11 @@ import {COLORS} from "../../../common/constants/theme";
 interface Props {
   name: string;
   avatar: string;
-  phone: string;
+  email: string;
   onPress(): void;
 }
 
-const RoomListItem: React.FC<Props> = ({ name, avatar, phone, onPress }) => {
+const RoomListItem: React.FC<Props> = ({ name, avatar, email, onPress }) => {
   return (
     <TouchableHighlight
       underlayColor={COLORS.grey}
@@ -35,7 +35,7 @@ const RoomListItem: React.FC<Props> = ({ name, avatar, phone, onPress }) => {
 
         <View style={styles.details}>
           <Text style={[styles.title]}>{name}</Text>
-          <Text style={styles.subtitle}>{phone}</Text>
+          <Text style={styles.subtitle}>{email}</Text>
         </View>
       </View>
     </TouchableHighlight>
@@ -76,12 +76,12 @@ const styles = StyleSheet.create<Style>({
     marginLeft: 20
   },
   title: {
-    color: COLORS.black,
+    color: COLORS.white,
     fontWeight: "bold",
     fontSize: 16
   },
   subtitle: {
-    color: COLORS.blue,
+    color: COLORS.primary,
     fontSize: 15,
     marginTop: 4
   }

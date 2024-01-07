@@ -1,13 +1,16 @@
 import React from 'react'
-import { Image, StyleSheet } from 'react-native';
+import { Image, ScrollView, StyleSheet } from 'react-native';
 import useTheme, { ThemeProvider } from '../../../common/hooks/useTheme';
 import { Block, Button, Input, Text} from '../../../common/components';
 import { RegisterProps } from '../AuthNavigator';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 
 const Register : React.FC<RegisterProps> = ({navigation}) => {
     const {sizes, colors} = useTheme();
   return (
+    <ScrollView>
+
     <Block color={colors.secondary} flex={1}>
       <Image 
       style={styles.image}
@@ -49,12 +52,22 @@ const Register : React.FC<RegisterProps> = ({navigation}) => {
           <Button marginTop={sizes.m} onPress={() => navigation.navigate('Login')}>
               <Text p weight='bold' align='right'>Already have an account? Sign in</Text> 
           </Button>
-          <Button marginTop={sizes.m} onPress={() => navigation.navigate('Login')}>
-              <Text p weight='bold' align='right'>Continue with Google? Click here</Text> 
+          <Text p weight='bold' align='center'>
+            Continue with 
+          </Text> 
+          <Block align='center' justify='space-evenly' marginTop={sizes.m} flex={1} row>
+
+          <Button  onPress={() => navigation.navigate('Register')}>
+                <FontAwesome name="google-plus-square" size={46} style={{ color: colors.primary }} />
           </Button>
+          <Button  onPress={() => navigation.navigate('Register')}>
+                <FontAwesome name="facebook-square" size={46} style={{ color: colors.primary }} />
+          </Button>
+          </Block>
       </Block>
     </Block>
-  )
+    </ScrollView>
+  );
 }
 const styles = StyleSheet.create({ 
   image: {

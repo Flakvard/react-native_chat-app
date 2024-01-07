@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { COLORS } from '../../../common/constants/theme';
 
 
 interface ToolbarProps {
@@ -95,7 +96,7 @@ const styles = StyleSheet.create({
         paddingVertical: 10,
         paddingHorizontal: 10,
         paddingLeft: 16,
-        backgroundColor: 'white',
+        backgroundColor: COLORS.primary,//'white',
     },
     button: {
         top: -2,

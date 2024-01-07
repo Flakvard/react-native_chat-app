@@ -9,12 +9,13 @@ import {
   Linking,
 } from "react-native";
 import getURLParams from "../../../common/utils/getURLParams";
-import store from "../store";
+import store from "../../../common/store";
 import { MappedContact, Subscription } from "../../../common/utils/types";
 import RoomListItem from "../components/RoomListItem";
 import { fetchContacts } from "../../../common/utils/api";
 import { RoomListProps } from "../RoomNavigator";
 import useTheme from "../../../common/hooks/useTheme";
+import { COLORS } from "../../../common/constants/theme";
 
 
 const RoomList : React.FC<RoomListProps> = ({navigation}) => {
@@ -35,6 +36,8 @@ const RoomList : React.FC<RoomListProps> = ({navigation}) => {
 
     const unsubscribe: Subscription = store.onChange(() => updateState());
 
+    // first time it fetches data - may case trouble if other pages are opened first 
+    // fx. deeplinking
     const fetchData = async () => {
         const fetchedContacts = await fetchContacts();
         store.setState({ contacts: fetchedContacts, isFetchingContacts: false });
@@ -69,13 +72,13 @@ const RoomList : React.FC<RoomListProps> = ({navigation}) => {
   };
 
   const renderContact = ({ item }: { item: MappedContact }) => {
-    const { id, name, avatar, phone } = item;
+    const { id, name, avatar, email } = item;
 
     return (
       <RoomListItem
         name={name}
         avatar={avatar}
-        phone={phone}
+        email={email}
         onPress={() => navigation.navigate("Profile", {userId: id})}
       />
     );
@@ -104,7 +107,7 @@ interface Style {
 
 const styles = StyleSheet.create<Style>({
   container: {
-    backgroundColor: "white",
+    backgroundColor: COLORS.secondary,
     justifyContent: "center",
     flex: 1,
   },

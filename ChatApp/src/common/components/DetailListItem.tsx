@@ -1,19 +1,21 @@
 import React from "react";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { StyleSheet, View, Text, ViewStyle, TextStyle } from "react-native";
-import {COLORS} from "../../../common/constants/theme";
+import { StyleSheet,  ViewStyle, TextStyle } from "react-native";
+import { COLORS } from "../constants/theme";
+import { Block, Text } from ".";
 
 interface Props {
   icon?: string;
   title: string;
   subtitle?: string;
+  onPress?: () => {};
 }
 
 const DetailListItem: React.FC<Props> = ({ icon, title, subtitle }) => {
   return (
-    <View style={styles.borderContainer}>
-      <View style={styles.wrapper}>
-        <View style={styles.container}>
+    <Block style={styles.borderContainer}>
+      <Block style={styles.wrapper}>
+        <Block style={styles.container}>
           {icon && (
             <MaterialIcons
               name={icon}
@@ -24,14 +26,14 @@ const DetailListItem: React.FC<Props> = ({ icon, title, subtitle }) => {
               }}
             />
           )}
-          <View style={styles.contentContainer}>
+          <Block style={styles.contentContainer}>
             <Text style={[styles.title]}>{title}</Text>
 
             {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
-          </View>
-        </View>
-      </View>
-    </View>
+          </Block>
+        </Block>
+      </Block>
+    </Block>
   );
 };
 

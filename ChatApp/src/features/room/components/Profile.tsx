@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { StyleSheet, View, ViewStyle } from "react-native";
-import ContactThumbnail from "./ContactThumbnail";
-import DetailListItem from "./DetailListItem";
-import { MappedContact, StoreState } from "../../../common/utils/types";
+import { MappedContact } from "../../../common/utils/types";
 import {COLORS} from "../../../common/constants/theme";
-import store from "../store";
+import store from "../../../common/store";
 import { ProfileProps } from "../RoomNavigator";
+import { DetailListItem, ContactThumbnail  } from "../../../common/components";
 
 
 const Profile: React.FC<ProfileProps> = ({ route }) => {
@@ -59,11 +58,11 @@ const styles = StyleSheet.create<Style>({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.secondary,
   },
   detailsSection: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: COLORS.secondary,
   },
 });
 

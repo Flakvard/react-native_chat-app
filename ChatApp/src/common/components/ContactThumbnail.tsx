@@ -3,14 +3,13 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {
   StyleSheet,
   View,
-  TouchableOpacity,
   Image,
   Text,
   ViewStyle,
   ImageStyle,
   TextStyle,
-  GestureResponderEvent,
 } from "react-native";
+import { COLORS } from "../constants/theme";
 
 interface Props {
   name?: string;
@@ -24,7 +23,7 @@ const ContactThumbnail: React.FC<Props> = ({
   name = "",
   phone = "",
   avatar,
-  textColor = "white",
+  textColor = COLORS.primary,
   onPress,
 }) => {
   const colorStyle = {
@@ -77,6 +76,7 @@ const styles = StyleSheet.create<Style>({
     marginTop: 24,
     marginBottom: 2,
     fontWeight: "bold",
+    color: COLORS.secondary,
   },
   phoneSection: {
     flexDirection: "row",
