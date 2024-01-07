@@ -1,6 +1,6 @@
 import { createNativeStackNavigator  } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { Listener, MappedContact } from '../common/utils/types';
+import { Listener } from '../common/utils/types';
 import store from '../common/store';
 import { COLORS } from '../common/constants/theme';
 import { ThemeProvider } from '../common/hooks/useTheme';

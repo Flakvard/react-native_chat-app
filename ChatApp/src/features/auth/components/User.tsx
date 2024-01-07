@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, ActivityIndicator, ViewStyle } from "react-native";
 import { COLORS } from "../../../common/constants/theme";
 import store from "../../../common/store";
-import { Listener, MappedContact, Subscription } from "../../../common/utils/types";
-import { fetchUserContact } from "../../../common/utils/api";
+import { Listener, MappedContact } from "../../../common/utils/types";
 import { UserProps } from "../AuthNavigator";
 import { ContactThumbnail } from "../../../common/components";
+import { fetchUserContact } from "../../../services/api/api";
 
 interface State {
   user?: MappedContact | {};

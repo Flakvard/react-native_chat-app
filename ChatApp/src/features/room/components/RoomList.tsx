@@ -12,10 +12,10 @@ import getURLParams from "../../../common/utils/getURLParams";
 import store from "../../../common/store";
 import { MappedContact, Subscription } from "../../../common/utils/types";
 import RoomListItem from "../components/RoomListItem";
-import { fetchContacts } from "../../../common/utils/api";
 import { RoomListProps } from "../RoomNavigator";
 import useTheme from "../../../common/hooks/useTheme";
 import { COLORS } from "../../../common/constants/theme";
+import { fetchContacts } from "../../../services/api/api";
 
 
 const RoomList : React.FC<RoomListProps> = ({navigation}) => {
