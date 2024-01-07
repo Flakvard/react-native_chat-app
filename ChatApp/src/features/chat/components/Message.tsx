@@ -13,6 +13,7 @@ import MeasureLayout, { MeasureLayoutProps } from './MeasureLayout';
 import MessagingContainer, { INPUT_METHOD } from './MessagingContainer';
 import { MessageShape } from '../utils/types';
 import { MessageProps } from '../ChatNavigator';
+import { COLORS } from '../../../common/constants/theme';
 
 
 interface MessageScreenState {
@@ -283,20 +284,20 @@ const Message : React.FC<MessageProps> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.secondary,
   },
   content: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.secondary,
   },
   inputMethodEditor: {
     flex: 1,
-    backgroundColor: 'white',
+    backgroundColor: COLORS.secondary,
   },
   toolbar: {
     borderTopWidth: 1,
     borderTopColor: 'rgba(0,0,0,0.04)',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.secondary,
   },
   fullscreenOverlay: {
     ...StyleSheet.absoluteFillObject,

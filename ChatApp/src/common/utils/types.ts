@@ -30,4 +30,5 @@ export interface StoreState {
   contacts: MappedContact[];
   user: MappedContact | {};
   error: boolean;
+  isLoggedIn: boolean;
 }

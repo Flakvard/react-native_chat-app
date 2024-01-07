@@ -4,7 +4,8 @@ import { COLORS } from "../../../common/constants/theme";
 import store from "../../../common/store";
 import { Listener, MappedContact, Subscription } from "../../../common/utils/types";
 import { fetchUserContact } from "../../../common/utils/api";
-import ContactThumbnail from "../../../common/components/ContactThumbnail";
+import { UserProps } from "../AuthNavigator";
+import { ContactThumbnail } from "../../../common/components";
 
 interface State {
   user?: MappedContact | {};
@@ -16,7 +17,7 @@ interface Style {
   container: ViewStyle;
 }
 
-const User: React.FC = () => {
+const User: React.FC<UserProps> = (navigation) => {
   // State to hold user data, loading state, and error stat
   const [state, setState] = useState<State>({
     user: store.getState().user,
@@ -71,7 +72,7 @@ const styles = StyleSheet.create<Style>({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: COLORS.blue,
+    backgroundColor: COLORS.secondary,
   },
 });
 
