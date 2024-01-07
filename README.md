@@ -36,7 +36,10 @@ Simple chat application using react native
 # Simple gif preview of app
 `It is only tested on Android, I do not have a MacBook.`
 
-![intro]("./media/intro.gif")
+<img src="https://github.com/Flakvard/react-native_chat-app/blob/master/media/intro.gif" width="25%" height="25%"/>
+
+
+<img src="https://github.com/Flakvard/react-native_chat-app/blob/master/media/rooms.jpg?raw=true" width="15%"></img> <img src="https://github.com/Flakvard/react-native_chat-app/blob/master/media/myUser.jpg?raw=true" width="15%"></img> <img src="https://github.com/Flakvard/react-native_chat-app/blob/master/media/chat.jpg?raw=true" width="15%"></img> <img src="https://github.com/Flakvard/react-native_chat-app/blob/master/media/contact.jpg?raw=true" width="15%"></img> <img src="https://github.com/Flakvard/react-native_chat-app/blob/master/media/login.jpg?raw=true" width="15%"></img> <img src="https://github.com/Flakvard/react-native_chat-app/blob/master/media/register.jpg?raw=true" width="15%"></img> 
 
 # Getting started 
 Clone via bash.
@@ -191,13 +194,16 @@ I did not get the time to implement this part...
 
 ## Hours committed vs hours completed
 Log hours where holding up.
-![intro]("./media/intro.gif")
+
+![logHour](https://github.com/Flakvard/react-native_chat-app/blob/master/media/logHours.png)
 
 
 ## Completeness of the project MVP
 There are 40 assignment and 14 where not completeted. These are not weighted evenly, but would be I completed about 65% of the project - which holds up to the [91.85% calculated](#1-notes) in the beginning of the project.
 
 I am happy with the results.
+
+I had comitted 89 hours to the project and I did 101,3 hours total.
 
 # Appendex
 
