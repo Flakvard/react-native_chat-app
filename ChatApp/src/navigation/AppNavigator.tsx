@@ -8,6 +8,7 @@ export type RootParamList = {
   Message:  undefined;
   RoomList: undefined;
   Profile:  { userId: string };
+  User: undefined;
 }
 
 const isLoggedIn = false;
